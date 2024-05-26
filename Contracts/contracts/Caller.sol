@@ -29,5 +29,9 @@ contract Caller {
         emit ResultProcessed(_requestID, result);
     }
 
+    function setUrl(string memory _url) public {
+        url = _url;
+    }
+
     // tx -> logs -> 
 }
