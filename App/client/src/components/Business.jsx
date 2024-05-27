@@ -1,31 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { features } from "../constants";
 import styles, { layout } from "../style";
-import Button from "./Button";
-
-const FeatureCard = ({ icon, title, content, index }) => (
-  <div
-    className={`flex flex-row p-6 rounded-[20px] 
-  ${index !== features.length - 1 ? "mb-6" : "mb-0"} 
-  feature-card`}
-  >
-    <div
-      className={`w-[64px] h-[64px] rounded-full ${styles.flexCenter} bg-dimBlue`}
-    >
-      <img src={icon} alt="star" className="w-[50%] h-[50%] object-contain" />
-    </div>
-    <div className="flex-1 flex flex-col ml-3">
-      <h4 className="font-poppins font-semibold text-white text-[18px] leading-[23.4px] mb-1">
-        {title}
-      </h4>
-      <p className="font-poppins font-normal text-dimWhite text-[16px] leading-[24px]">
-        {content}
-      </p>
-    </div>
-  </div>
-);
+import ResultModal from "./ResultModal";
 
 const Business = () => {
+  const [inputValue, setInputValue] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleReset = () => {
+    setInputValue("");
+  };
+
+  const handleSend = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <section id="features" className={layout.section}>
       <div
@@ -33,11 +26,12 @@ const Business = () => {
         style={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "flex-start", // Align box to the left
+          alignItems: "center", // Centering items horizontally
+          marginTop: "100px",
         }}
       >
         {/* Text Above the Box */}
-        <p style={{ color: "#fff", marginBottom: "10px" }}>
+        <p style={{ color: "#fff", marginBottom: "40px", fontSize: "25px" }}>
           Paste your transaction hash here
         </p>
 
@@ -45,7 +39,7 @@ const Business = () => {
         <div
           style={{
             backgroundColor: "rgba(30, 33, 57, 0.5)", // Translucent background
-            height: "250px", // Increased height
+            height: "300px", // Increased height
             width: "50%", // Half of the screen width
             marginBottom: "20px",
             border: "1px solid #fff", // White border for visibility
@@ -60,37 +54,45 @@ const Business = () => {
         >
           <input
             type="text"
-            placeholder="Enter text here"
+            placeholder="Enter the transaction hash"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
             style={{
               backgroundColor: "transparent",
               border: "none",
               color: "#fff",
               outline: "none",
               width: "100%",
-              marginBottom: "10px",
+              marginBottom: "30px",
+              textAlign: "center",
+              fontSize: "18px",
             }}
           />
 
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-12">
             <button
-              className="py-3 px-6 bg-blue-gradient font-poppins
-      font-medium text-[16px]
-    text-primary outline-none rounded-[10px]"
+              className="py-3 px-6 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px]"
               style={{ marginRight: "10px" }}
+              onClick={handleSend}
             >
               Send
             </button>
             <button
-              className="py-3 px-6 bg-blue-gradient font-poppins
-      font-medium text-[16px]
-    text-primary outline-none rounded-[10px]"
+              className="py-3 px-6 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px]"
               style={{ marginLeft: "10px" }}
+              onClick={handleReset}
             >
               Reset
             </button>
           </div>
         </div>
       </div>
+
+      <ResultModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        inputValue={inputValue}
+      />
     </section>
   );
 };
