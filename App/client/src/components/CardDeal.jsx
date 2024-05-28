@@ -1,25 +1,32 @@
-import { card } from "../assets";
+import { card, shield } from "../assets";
 import styles, { layout } from "../style";
 import Button from "./Button";
+import shieldvid from "../assets/shieldvid.mp4";
 
 const CardDeal = () => (
-  <section className={layout.section}>
-    {/* <div className={layout.sectionInfo}>
-      <h2 className={styles.heading2}>
-        Find a better card deal <br className="sm:block hidden" /> in few easy
-        steps.
+  <section
+    id="product"
+    className={layout.section}
+    style={{ marginTop: "40px" }}
+  >
+    <div className={layout.sectionInfo}>
+      <h2 className={styles.heading2} style={{ marginTop: "40px" }}>
+        Who are we? What we do? <br className="sm:block hidden" />
       </h2>
-      <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
-        Arcu tortor, purus in mattis at sed integer faucibus. Aliquet quis
-        aliquet eget mauris tortor.ç Aliquet ultrices ac, ametau.
+      <p className={`${styles.paragraph} max-w-[800px] mt-5`}>
+        We are AntiMEV, a pioneering team dedicated to enhancing blockchain
+        security.We specialize in detecting and classifying Maximal Extractable
+        Value (MEV) transactions within blockchain networks. Our flagship
+        solution, ArbiNet, offers unmatched accuracy and efficiency in MEV
+        detection, revolutionizing blockchain security.
       </p>
-
-      <Button styles={`mt-10`} />
     </div>
 
     <div className={layout.sectionImg}>
-      <img src={card} alt="billing" className="w-[100%] h-[100%]" />
-    </div> */}
+      <video autoPlay loop muted style={{ width: "40%", height: "auto" }}>
+        <source src={shieldvid} type="video/mp4" />
+      </video>
+    </div>
   </section>
 );
 
