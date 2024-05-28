@@ -37,22 +37,22 @@ const Business = () => {
 
   const handleSend = async () => {
     try {
-      const receipt = await Web3.getTransactionReceipt(inputValue);
-      // const receipt = await getTransactionReceipt(inputValue);
+      // const receipt = await Web3.getTransactionReceipt(inputValue);
+      const receipt = await getTransactionReceipt(inputValue);
 
       // format data
-      const data = {};
+      // const data = {};
 
-      const tx = await contract.methods
-        .requestResult(data)
-        .send({ from: walletAddress });
+      // const tx = await contract.methods
+      //   .requestResult(data)
+      //   .send({ from: walletAddress });
 
-      const filterValue = await tx.events.DataRequested.returnValues;
+      // const filterValue = await tx.events.DataRequested.returnValues;
 
-      //  filter result
+      // //  filter result
 
-      if (inputValue) {
-      }
+      // if (inputValue) {
+      // }
 
       setIsModalOpen(true);
     } catch (error) {
@@ -75,7 +75,7 @@ const Business = () => {
           marginTop: "100px",
         }}
       >
-        <p style={{ color: "#fff", marginBottom: "40px", fontSize: "25px" }}>
+        <p style={{ color: "#fff", marginBottom: "40px", fontSize: "30px" }}>
           Paste your transaction hash here
         </p>
 
@@ -117,8 +117,8 @@ const Business = () => {
         <div
           style={{
             backgroundColor: "rgba(30, 33, 57, 0.5)", // Semi-transparent background
-            height: "300px",
-            width: "50%",
+            height: "400px",
+            width: "60%",
             marginBottom: "20px",
             border: "1px solid #fff",
             borderRadius: "10px",
@@ -174,14 +174,14 @@ const Business = () => {
 
           <div className="flex justify-center mt-12">
             <button
-              className="py-3 px-6 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px]"
+              className="py-3 px-6 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px] mt-4"
               style={{ marginRight: "10px" }}
               onClick={handleSend}
             >
               Send
             </button>
             <button
-              className="py-3 px-6 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px]"
+              className="py-3 px-6 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px] mt-4"
               style={{ marginLeft: "10px" }}
               onClick={handleReset}
             >

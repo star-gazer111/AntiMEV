@@ -65,24 +65,29 @@ const Hero = () => {
         <div className="relative z-[5] w-[100%] mt-10 py-2 ">
           <ol reversed className="paces" lang="en">
             <li className="pace js text-l">
-              JS+
+              SOLUTION
               <blockquote className="quote js">
-                JS+: The JavaScript ecosystem (not the language!): Anyone else
-                feels overwhelmed by the rate of rapid changes here?
+                AntiMEV: Enhancing DeFi security by preventing Miner Extractable
+                Value (MEV) exploits with advanced GNN-powered transaction
+                integrity solutions.
               </blockquote>
             </li>
             <li className="pace css text-l">
-              CSS
+              PROBLEM
               <blockquote className="quote css">
-                CSS: This is moving in a nice click lately, with lots of useful
-                new stuff enabled in the browsers.
+                The negative effects of MEV and arbitrage on the consensus layer
+                include increased network congestion, higher transaction fees,
+                and potential centralization risks, which can undermine the
+                security and fairness of the blockchain.
               </blockquote>
             </li>
             <li className="pace html text-l">
-              ARBITRAGE
+              NO MEV !
               <blockquote className="quote html">
-                Arbitrage: Exploiting price differences in different markets to
-                make a profit.
+                Maximal Extractable Value is problematic because it allows
+                arbitrage bots and miners to exploit transaction ordering,
+                leading to increased transaction costs, market manipulation, and
+                an overall less fair and efficient blockchain ecosystem.
               </blockquote>
             </li>
             <li className="pace url text-l">
