@@ -11,10 +11,12 @@
   "dependencies": {
     "@thirdweb-dev/react": "^4.6.26",
     "@thirdweb-dev/sdk": "^4.0.87",
+    "dotenv": "^16.4.5",
     "ethers": "^5.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-modal": "^3.16.1"
+    "react-modal": "^3.16.1",
+    "web3": "^4.9.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.15",

@@ -15,13 +15,13 @@ const Hero = () => {
       <div
         className={`flex-1 ${styles.flexStart} flex-col xl:px-0 sm:px-16 px-6`}
       >
-        <div className="flex flex-row items-center py-[6px] px-4 bg-discount-gradient rounded-[10px] mb-2">
-          <img src={discount} alt="discount" className="w-[32px] h-[32px]" />
-          <p className={`${styles.paragraph} ml-2`}>
+        {/* <div className="flex flex-row items-center py-[6px] px-4 bg-discount-gradient rounded-[10px] mb-2"> */}
+        {/* <img src={discount} alt="discount" className="w-[32px] h-[32px]" /> */}
+        {/* <p className={`${styles.paragraph} ml-2`}>
             <span className="text-white">20%</span> Discount For{" "}
             <span className="text-white"> 1 Month</span> Account
-          </p>
-        </div>
+          </p> */}
+        {/* </div> */}
 
         <div
           className="flex flex-row
@@ -29,32 +29,31 @@ const Hero = () => {
         >
           {/* Use flex-1 to allow a flex item to grow and shrink as needed, ignoring its initial size  */}
 
-          <h1
+          <h2
             className="flex-1 font-poppins
-          font-semibold ss:text-[72px] text-[52px] text-white ss:leading-[100px] leading-[75px]"
+          font-semibold ss:text-[52px] text-[52px] text-white ss:leading-[52px] leading-[55px]"
           >
-            The Next{" "}
+            Empowering DeFi Safety with{" "}
             <br
               className="sm:block
             hidden"
             />{" "}
-            <span className="text-gradient">Generation</span>{" "}
-          </h1>
+            <span className="text-gradient">GNN-Powered</span>{" "}
+          </h2>
           <div className="ss:flex hidden md:mr-4 mr-0">
             <GetStarted />
           </div>
         </div>
-        <h1
+        <h2
           className="font-poppins
-        font-semibold ss:text-[68px] text-[52px]
-        text-white ss:leading-[100px] leading-[75px] w-full"
+        font-semibold ss:text-[52px] text-[52px]
+        text-white ss:leading-[42px] leading-[75px] w-full"
         >
-          Payment Method.
-        </h1>
+          Transaction Integrity.
+        </h2>
         <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
-          Our team of experts uses a methodology to identify the credit cards
-          most likely to fit your needs. We examine annual percentage rates,
-          annual fees.
+          Shielding users from potential risks associated with Miner Extractable
+          Value (MEV) in the ever-evolving landscape of decentralized finance.
         </p>
       </div>
 
@@ -65,47 +64,47 @@ const Hero = () => {
         {/* <img src={robot} alt="billing" className='w-[100%] relative z-[5]'/>} */}
         <div className="relative z-[5] w-[100%] mt-10 py-2 ">
           <ol reversed className="paces" lang="en">
-            <li className="pace js">
+            <li className="pace js text-l">
               JS+
               <blockquote className="quote js">
                 JS+: The JavaScript ecosystem (not the language!): Anyone else
                 feels overwhelmed by the rate of rapid changes here?
               </blockquote>
             </li>
-            <li className="pace css">
-              i CSS
+            <li className="pace css text-l">
+              CSS
               <blockquote className="quote css">
                 CSS: This is moving in a nice click lately, with lots of useful
                 new stuff enabled in the browsers.
               </blockquote>
             </li>
-            <li className="pace html">
-              HTML
+            <li className="pace html text-l">
+              ARBITRAGE
               <blockquote className="quote html">
-                HTML: Started with 20 something "tags", now we have over 100
-                "elements", but I feel that I've been able to keep up with the
-                pace of change here.
+                Arbitrage: Exploiting price differences in different markets to
+                make a profit.
               </blockquote>
             </li>
-            <li className="pace url">
-              URLs
+            <li className="pace url text-l">
+              ARBITRAGE
               <blockquote className="quote url">
-                URLs: Sadly they are frequently changing; links die. We should
-                work hard to keep URLs unchanged, but that's not how it is.
+                Arbitrage: Exploiting price differences in different markets to
+                make a profit.
               </blockquote>
             </li>
-            <li className="pace http">
-              HTTP
+            <li className="pace http text-l">
+              MEV
               <blockquote className="quote http">
-                HTTP: Gradually changed (http/2), but it kind of feels good that
-                it doesn't constantly change underneath us.
+                MEV: Miner Extractable Value, profits generated by miners
+                through transaction ordering.
               </blockquote>
             </li>
-            <li className="pace tcpip">
-              TCP/IP
+            <li className="pace tcpip text-l">
+              GNN
               <blockquote className="quote tcpip">
-                TCP/IP: Deliberately dumb, simple, all it does is move packets
-                around.
+                Graph Neural Networks are a class of neural networks tailored
+                for analyzing graph-structured data, enabling them to capture
+                intricate relationships among interconnected entities.
               </blockquote>
             </li>
           </ol>

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import "../ResultModal.css";
 import loader from "../assets/loader.mp4";
+import Web3 from "web3";
+import Oracle from "../contracts/Oracle.json";
 
 Modal.setAppElement("#root");
 
@@ -10,17 +12,60 @@ const ResultModal = ({ isOpen, onClose, inputValue }) => {
   const [result, setResult] = useState(null);
 
   // Function to fetch result from backend
-  const fetchResult = async () => {
-    // Example fetch request to the backend, replace with your actual endpoint
-    const response = await fetch(`your-backend-endpoint?input=${inputValue}`);
-    const data = await response.json();
-    setResult(data.result);
+  // const fetchResult = async () => {
+  //   // Example fetch request to the backend, replace with your actual endpoint
+  //   const response = await fetch(`your-backend-endpoint?input=${inputValue}`);
+  //   const data = await response.json();
+  //   setResult(data.result);
+  // };
+
+  const getEvent = async () => {
+    try {
+      const web3 = new Web3("http://localhost:8545");
+      const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+      const contractInstance = new web3.eth.Contract(Oracle, contractAddress);
+
+      // Get the latest block number
+      const latestBlockNumber = await web3.eth.getBlockNumber();
+
+      // Calculate the block number to start searching from
+      const startBlock = Math.max(0, latestBlockNumber - 4);
+
+      // Listen to ResultProcessed event of Caller contract
+      contractInstance.events.ResultProcessed(
+        {
+          filter: {},
+          fromBlock: startBlock,
+        },
+        function (error, event) {
+          if (error) {
+            console.error("Error in event handler:", error);
+          } else {
+            console.log("Event:", event);
+            // Ensure that event.returnValues contains the expected data
+            // and index 1 holds the value you want to display
+            if (event.returnValues && event.returnValues.length >= 2) {
+              setResult(event.returnValues[1]);
+            } else {
+              console.error("Event data is not as expected");
+            }
+          }
+        }
+      );
+    } catch (error) {
+      console.error("Error in getEvent:", error);
+    }
   };
+
+  // Call the getEvent function when the component mounts
+  // useEffect(() => {
+  //   getEvent();
+  // }, []);
 
   // Fetch result when the component mounts
   useEffect(() => {
     if (isOpen) {
-      fetchResult();
+      getEvent();
     }
   }, [isOpen, inputValue]);
 
