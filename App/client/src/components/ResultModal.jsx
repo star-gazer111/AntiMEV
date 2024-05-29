@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Modal from "react-modal";
-import loader from "../assets/loader.mp4";
 import MagLoader from "../assets/MagLoader.mp4";
 import Web3 from "web3";
 import Oracle from "../contracts/Oracle.json";
@@ -9,43 +8,71 @@ Modal.setAppElement("#root");
 
 const ResultModal = ({ isOpen, onClose, inputValue }) => {
   const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const getEvent = async () => {
+  const getEvent = useCallback(async () => {
     try {
-      const web3 = new Web3("http://localhost:8545");
-      const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+      // give option betwenn galadriel or filecoin network
+      // option between rpc -> create 2 sets
+      const web3 = new Web3(
+        "https://polygon-amoy.g.alchemy.com/v2/sqeU7BdoNCBWEPHTgRMpC8VAWuPuh0ZS"
+      );
+      // galabriel network address =
+      // or
+      // filecoin network address =
+      const contractAddress = "0x6C60b01A7C22b72ce4d6407c8169BC949EECDc1a";
       const contractInstance = new web3.eth.Contract(Oracle, contractAddress);
       const latestBlockNumber = await web3.eth.getBlockNumber();
-      const startBlock = Math.max(0, latestBlockNumber - 4);
+      // const startBlock = Math.max(0, latestBlockNumber - 100); // Increased range to ensure event capture
 
-      contractInstance.events.ResultProcessed(
-        {
-          filter: {},
-          fromBlock: startBlock,
-        },
-        function (error, event) {
-          if (error) {
-            console.error("Error in event handler:", error);
-          } else {
-            console.log("Event:", event);
-            if (event.returnValues && event.returnValues.length >= 2) {
-              setResult(event.returnValues[1]);
-            } else {
-              console.error("Event data is not as expected");
-            }
-          }
+      const events = await contractInstance.getPastEvents("DataRequested", {
+        fromBlock: 0,
+        toBlock: "latest",
+      });
+      console.log("Events:", events);
+
+      // const events = await contractInstance.getPastEvents("ResultProcessed", {
+      //   fromBlock: 0,
+      //   toBlock: "latest",
+      // });
+
+      // result setting logic
+
+      // input logs -> formatting inputs for Gnn model classification
+
+      // user -> hash ->  contract address, to-from,
+
+      // user -> send -> caller contract request result -> oracle contract request result ->
+      // backend event listen -> GNN api -> call oracle contract send result ->
+      // caller contract proceess result -> caller event listen -> frontend
+
+      if (events && events.length > 0) {
+        const lastEvent = events[events.length - 1];
+        console.log("Last event:", lastEvent);
+        if (lastEvent.returnValues) {
+          setResult(lastEvent.returnValues[1]);
+        } else {
+          console.error("Event data is not as expected");
         }
-      );
+      } else {
+        console.error("No events found");
+      }
     } catch (error) {
       console.error("Error in getEvent:", error);
+    } finally {
+      setLoading(false); // Set loading to false after attempting to fetch the event
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
+      setLoading(true); // Set loading to true when modal opens
       getEvent();
+    } else {
+      setResult(null);
+      setLoading(false);
     }
-  }, [isOpen, inputValue]);
+  }, [isOpen, getEvent]);
 
   const overlayStyles = {
     backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent overlay
@@ -89,8 +116,11 @@ const ResultModal = ({ isOpen, onClose, inputValue }) => {
         <video autoPlay loop muted style={{ width: "40%", height: "auto" }}>
           <source src={MagLoader} type="video/mp4" />
         </video>
-        {!result && <p>Waiting for the result...</p>}
-        {result && <p>This transaction is: {result}</p>}
+        {loading ? (
+          <p>Waiting for the result...</p>
+        ) : (
+          result && <p>This transaction is: {result}</p>
+        )}
 
         <button
           onClick={onClose}

@@ -14,14 +14,16 @@ const Business = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [contract, setContract] = useState(null);
 
-  useEffect(() => {
-    if (walletAddress) {
-      const web3 = new Web3("http://localhost:8545");
-      const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-      const contractInstance = new web3.eth.Contract(Caller, contractAddress);
-      setContract(contractInstance);
-    }
-  }, [walletAddress]);
+  // useEffect(() => {
+  //   if (walletAddress) {
+  //     // const web3 = new Web3(
+  //     //   "https://polygon-amoy.g.alchemy.com/v2/sqeU7BdoNCBWEPHTgRMpC8VAWuPuh0ZS"
+  //     // );
+  //     // const contractAddress = "0x169667De2B0EbefE1Ac958FC184B3d034E034b62";
+  //     // const contractInstance = new web3.eth.Contract(Caller, contractAddress);
+  //     // setContract(contractInstance);
+  //   }
+  // }, [walletAddress]);
 
   const handleReset = () => {
     setInputValue("");
@@ -35,24 +37,43 @@ const Business = () => {
     console.log("Calling contract function with receipt:", receipt);
   };
 
+  // const handleSend = async () => {
+  //   try {
+  //     // const receipt = await Web3.getTransactionReceipt(inputValue);
+  //     // const receipt = await getTransactionReceipt(inputValue);
+  //     const web3 = new Web3(
+  //       "https://polygon-amoy.g.alchemy.com/v2/sqeU7BdoNCBWEPHTgRMpC8VAWuPuh0ZS"
+  //     );
+  //     const contractAddress = "0x169667De2B0EbefE1Ac958FC184B3d034E034b62";
+  //     const contractInstance = new web3.eth.Contract(Caller, contractAddress);
+  //     setContract(contractInstance);
+  //     await contract.methods
+  //       .requestResult(inputValue)
+  //       .send({ from: walletAddress });
+
+  //     setIsModalOpen(true);
+  //   } catch (error) {
+  //     console.error("Error handling send:", error);
+  //   }
+  // };
+
   const handleSend = async () => {
     try {
-      // const receipt = await Web3.getTransactionReceipt(inputValue);
-      const receipt = await getTransactionReceipt(inputValue);
+      if (!window.ethereum) {
+        throw new Error("MetaMask is not installed.");
+      }
 
-      // format data
-      // const data = {};
+      // Request account access if needed
+      await window.ethereum.request({ method: "eth_requestAccounts" });
 
-      // const tx = await contract.methods
-      //   .requestResult(data)
-      //   .send({ from: walletAddress });
+      const web3 = new Web3(window.ethereum);
+      const contractAddress = "0x169667De2B0EbefE1Ac958FC184B3d034E034b62";
+      const contractInstance = new web3.eth.Contract(Caller, contractAddress);
 
-      // const filterValue = await tx.events.DataRequested.returnValues;
-
-      // //  filter result
-
-      // if (inputValue) {
-      // }
+      // Ensure inputValue is converted to a number or hexadecimal format as needed
+      await contractInstance.methods
+        .requestResult(inputValue)
+        .send({ from: walletAddress });
 
       setIsModalOpen(true);
     } catch (error) {
