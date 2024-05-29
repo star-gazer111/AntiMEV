@@ -15,7 +15,7 @@ const CardDeal = () => (
       </h2>
       <p className={`${styles.paragraph} max-w-[800px] mt-5`}>
         We are AntiMEV, a pioneering team dedicated to enhancing blockchain
-        security.We specialize in detecting and classifying Maximal Extractable
+        security.We specialize in detecting and classifying Maximum Extractable
         Value (MEV) transactions within blockchain networks. Our flagship
         solution, ArbiNet, offers unmatched accuracy and efficiency in MEV
         detection, revolutionizing blockchain security.
@@ -23,7 +23,7 @@ const CardDeal = () => (
     </div>
 
     <div className={layout.sectionImg}>
-      <video autoPlay loop muted style={{ width: "40%", height: "auto" }}>
+      <video autoPlay loop muted style={{ width: "45%", height: "auto" }}>
         <source src={shieldvid} type="video/mp4" />
       </video>
     </div>

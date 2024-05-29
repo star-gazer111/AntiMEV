@@ -15,7 +15,7 @@ const CTA = () => (
     </div>
 
     <div className={`${styles.flexCenter} sm:ml-10 ml-0 sm:mt-0 mt-10`}>
-      <img src={logo} alt="logo" className="w-[260px] h-[100px]" />
+      <img src={logo} alt="logo" className="w-[240px] h-[80px]" />
     </div>
   </section>
 );
