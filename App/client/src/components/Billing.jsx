@@ -74,7 +74,7 @@ const Billing = () => {
         >
           <div className="flex justify-center mt-1">
             <button
-              className="py-2 px-5 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px] mt-4"
+              className="py-2 px-5 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px] mt-4 mb-2"
               style={{ marginRight: "10px" }}
               onClick={handleSend}
             >
