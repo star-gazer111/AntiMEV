@@ -3,7 +3,7 @@ import styles, { layout } from "../style";
 import Button from "./Button";
 import shieldvid from "../assets/shieldvid.mp4";
 
-const CardDeal = () => (
+const AboutUs = () => (
   <section
     id="product"
     className={layout.section}
@@ -30,4 +30,4 @@ const CardDeal = () => (
   </section>
 );
 
-export default CardDeal;
+export default AboutUs;
