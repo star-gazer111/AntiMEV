@@ -100,41 +100,6 @@ const Business = () => {
           Paste your transaction hash here
         </p>
 
-        {/* <div
-          style={{
-            backgroundColor: "rgba(30, 33, 57, 0.5)",
-            height: "300px",
-            width: "50%",
-            marginBottom: "20px",
-            border: "1px solid #fff",
-            borderRadius: "10px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            color: "#fff",
-            padding: "20px",
-          }}
-        > */}
-        {/* <div
-          style={{
-            backgroundColor: "rgba(30, 33, 57, 0.5)", // Semi-transparent background
-            height: "300px",
-            width: "50%",
-            marginBottom: "20px",
-            border: "1px solid #fff",
-            borderRadius: "10px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            color: "#fff",
-            padding: "20px",
-            boxShadow: "0 0 20px rgba(255, 255, 255, 0.5)", // Whitish glow
-            background:
-              "linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%)", // Whitish gradient
-          }}
-        > */}
         <div
           style={{
             backgroundColor: "rgba(30, 33, 57, 0.5)", // Semi-transparent background
@@ -155,22 +120,6 @@ const Business = () => {
               "linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%)", // Whitish gradient
           }}
         >
-          {/* <input
-            type="text"
-            placeholder="Enter the transaction hash"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            style={{
-              backgroundColor: "transparent",
-              border: "none",
-              color: "#fff",
-              outline: "none",
-              width: "100%",
-              marginBottom: "30px",
-              textAlign: "center",
-              fontSize: "18px",
-            }}
-          /> */}
           <input
             type="text"
             placeholder="Enter the transaction hash"
