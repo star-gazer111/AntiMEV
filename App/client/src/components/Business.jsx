@@ -1,61 +1,48 @@
 import React, { useState, useContext, useEffect } from "react";
 import { WalletContext } from "./Wallet";
-import { features } from "../constants";
 import styles, { layout } from "../style";
 import ResultModal from "./ResultModal";
 import Web3 from "web3";
 import Caller from "../contracts/Caller.json";
-// import dotenv from "dotenv";
-// dotenv.config();
 
 const Business = () => {
   const { walletAddress } = useContext(WalletContext);
   const [inputValue, setInputValue] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [contract, setContract] = useState(null);
+  const [network, setNetwork] = useState("Galadriel");
 
-  // useEffect(() => {
-  //   if (walletAddress) {
-  //     // const web3 = new Web3(
-  //     //   "https://polygon-amoy.g.alchemy.com/v2/sqeU7BdoNCBWEPHTgRMpC8VAWuPuh0ZS"
-  //     // );
-  //     // const contractAddress = "0x169667De2B0EbefE1Ac958FC184B3d034E034b62";
-  //     // const contractInstance = new web3.eth.Contract(Caller, contractAddress);
-  //     // setContract(contractInstance);
-  //   }
-  // }, [walletAddress]);
+  const networks = {
+    Galadriel: {
+      rpcUrl: "https://galadriel.rpc.url",
+      contractAddress: "0xGaladrielContractAddress",
+    },
+    FVM: {
+      rpcUrl: "https://fvm.rpc.url",
+      contractAddress: "0xFVMContractAddress",
+    },
+  };
+
+  useEffect(() => {
+    const loadContract = async () => {
+      const { rpcUrl, contractAddress } = networks[network];
+      const web3 = new Web3(rpcUrl);
+      const contractInstance = new web3.eth.Contract(
+        Caller.abi,
+        contractAddress
+      );
+      setContract(contractInstance);
+    };
+    loadContract();
+  }, [network]);
+
+  const handleNetworkChange = (e) => {
+    setNetwork(e.target.value);
+  };
 
   const handleReset = () => {
     setInputValue("");
   };
-
-  const getTransactionReceipt = async (data) => {
-    return data;
-  };
-
-  const callContractFunction = async (receipt) => {
-    console.log("Calling contract function with receipt:", receipt);
-  };
-
-  // const handleSend = async () => {
-  //   try {
-  //     // const receipt = await Web3.getTransactionReceipt(inputValue);
-  //     // const receipt = await getTransactionReceipt(inputValue);
-  //     const web3 = new Web3(
-  //       "https://polygon-amoy.g.alchemy.com/v2/sqeU7BdoNCBWEPHTgRMpC8VAWuPuh0ZS"
-  //     );
-  //     const contractAddress = "0x169667De2B0EbefE1Ac958FC184B3d034E034b62";
-  //     const contractInstance = new web3.eth.Contract(Caller, contractAddress);
-  //     setContract(contractInstance);
-  //     await contract.methods
-  //       .requestResult(inputValue)
-  //       .send({ from: walletAddress });
-
-  //     setIsModalOpen(true);
-  //   } catch (error) {
-  //     console.error("Error handling send:", error);
-  //   }
-  // };
 
   const handleSend = async () => {
     try {
@@ -63,21 +50,20 @@ const Business = () => {
         throw new Error("MetaMask is not installed.");
       }
 
-      // Request account access if needed
       await window.ethereum.request({ method: "eth_requestAccounts" });
 
-      const web3 = new Web3(window.ethereum);
-      const contractAddress = "0x169667De2B0EbefE1Ac958FC184B3d034E034b62";
-      const contractInstance = new web3.eth.Contract(Caller, contractAddress);
+      if (!contract) {
+        throw new Error("Contract is not loaded.");
+      }
 
-      // Ensure inputValue is converted to a number or hexadecimal format as needed
-      await contractInstance.methods
+      await contract.methods
         .requestResult(inputValue)
         .send({ from: walletAddress });
 
       setIsModalOpen(true);
     } catch (error) {
       console.error("Error handling send:", error);
+      alert(error.message);
     }
   };
 
@@ -96,13 +82,20 @@ const Business = () => {
           marginTop: "100px",
         }}
       >
-        <p style={{ color: "#fff", marginBottom: "40px", fontSize: "30px" }}>
+        <p
+          className="text-gradient"
+          style={{
+            color: "rgba(30, 33, 57, 0.5)",
+            marginBottom: "40px",
+            fontSize: "30px",
+          }}
+        >
           Paste your transaction hash here
         </p>
 
         <div
           style={{
-            backgroundColor: "rgba(30, 33, 57, 0.5)", // Semi-transparent background
+            backgroundColor: "rgba(30, 33, 57, 0.5)",
             height: "400px",
             width: "60%",
             marginBottom: "20px",
@@ -115,11 +108,54 @@ const Business = () => {
             color: "#fff",
             padding: "20px",
             boxShadow:
-              "0 0 20px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 255, 255, 0.2), 0 0 50px rgba(255, 255, 255, 0.1)", // Scattered glow effect
+              "0 0 20px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 255, 255, 0.2), 0 0 50px rgba(255, 255, 255, 0.1)",
             background:
-              "linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%)", // Whitish gradient
+              "linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%)",
           }}
         >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginBottom: "50px",
+            }}
+          >
+            <p
+              className="font-poppins text-[20px]"
+              style={{ marginRight: "10px" }}
+            >
+              Select Network:
+            </p>
+            <select
+              value={network}
+              onChange={handleNetworkChange}
+              style={{
+                backgroundColor: "transparent",
+                border: "none",
+                color: "#fff",
+                outline: "none",
+                width: "150px",
+                textAlign: "center",
+                fontSize: "18px",
+                boxShadow: "0 0 20px rgba(255, 255, 255, 0.5)",
+                background:
+                  "linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%)",
+                padding: "10px",
+                borderRadius: "10px",
+                appearance: "none",
+                WebkitAppearance: "none",
+                MozAppearance: "none",
+              }}
+            >
+              <option className="font-poppins text-[20px]" value="Galadriel">
+                Galadriel
+              </option>
+              <option className="font-poppins text-[20px]" value="FVM">
+                FVM
+              </option>
+            </select>
+          </div>
+
           <input
             type="text"
             placeholder="Enter the transaction hash"
@@ -134,11 +170,11 @@ const Business = () => {
               marginBottom: "30px",
               textAlign: "center",
               fontSize: "18px",
-              boxShadow: "0 0 20px rgba(255, 255, 255, 0.5)", // Whitish glow
+              boxShadow: "0 0 20px rgba(255, 255, 255, 0.5)",
               background:
-                "linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%)", // Whitish gradient
-              padding: "15px", // Adjust padding as needed
-              borderRadius: "10px", // Rounded corners
+                "linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%)",
+              padding: "15px",
+              borderRadius: "10px",
             }}
           />
 
