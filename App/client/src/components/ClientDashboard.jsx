@@ -6,8 +6,8 @@ import styles, { layout } from "../style";
 const ClientDashboard = () => {
   const handleSend = () => {
     const link = document.createElement("a");
-    link.href = "../assets/arbinet.py.zip"; // Update this path to the actual file location on your server
-    link.download = "model.zip"; // The name for the downloaded file
+    link.href = "../assets/arbinet.py.zip";
+    link.download = "model.zip";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

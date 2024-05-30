@@ -92,17 +92,24 @@ const Navbar = () => {
       <div className="ml-7">
         <button
           onClick={connectWallet}
-          className="ml-3px py-2 px-3 bg-blue-gradient font-poppins
-    font-medium text-[14px]
-  text-primary outline-none rounded-[10px]"
+          className="ml-3px py-2 px-6 bg-blue-gradient font-poppins
+      font-medium text-[14px]
+    text-primary outline-none rounded-[10px]"
+          style={{ width: "200px" }} // Added inline style for specific width
         >
-          <span className="is-link has-text-weight-bold ">
-            {walletAddress && walletAddress.length > 0
-              ? `Connected: ${walletAddress.substring(
-                  0,
-                  6
-                )}...${walletAddress.substring(38)}`
-              : "Connect Wallet"}
+          <span className="is-link has-text-weight-bold">
+            {walletAddress && walletAddress.length > 0 ? (
+              <>
+                User
+                <span
+                  style={{ marginLeft: "10px" }}
+                >{`${walletAddress.substring(0, 6)}...${walletAddress.substring(
+                  38
+                )}`}</span>
+              </>
+            ) : (
+              "Connect Wallet"
+            )}
           </span>
         </button>
       </div>
