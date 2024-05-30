@@ -5,12 +5,10 @@ import styles, { layout } from "../style";
 
 const ClientDashboard = () => {
   const handleSend = () => {
-    const link = document.createElement("a");
-    link.href = "../assets/arbinet.py.zip";
-    link.download = "model.zip";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    window.open(
+      "https://github.com/star-gazer111/AntiMEV/blob/dev/README.md",
+      "_blank"
+    );
   };
 
   return (
@@ -58,7 +56,7 @@ const ClientDashboard = () => {
           </p>
         </div>
         <div className="mt-20">
-          <p className="mt-5 font-poppins text-[20px]">Layers: 7</p>
+          <p className="mt-5 font-poppins text-[20px]">Layers: 5</p>
           <p className="font-poppins text-[20px]">
             Activation Function: Sigmoid
           </p>
@@ -74,7 +72,7 @@ const ClientDashboard = () => {
               style={{ marginRight: "10px" }}
               onClick={handleSend}
             >
-              Download Model
+              Get Started
             </button>
           </div>
         </div>
@@ -84,3 +82,10 @@ const ClientDashboard = () => {
 };
 
 export default ClientDashboard;
+
+// next steps:
+
+// Use this command to set up your Lit environment:
+// node run_scripts.js
+
+// Use this bash script to
