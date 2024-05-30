@@ -15,37 +15,31 @@ const ResultModal = ({ isOpen, onClose, inputValue }) => {
     try {
       setLoading(true);
 
-      // Simulate fetching data
       setTimeout(() => {
         setLoading(false);
         setReceipt(true);
+
         setTimeout(() => {
-          // if (
-          //   inputValue ===
-          //   "0x6e43e11c54b1bc8c1c02ff9f41c2ac4743e2185040197b29a50c2b5e239a73e8"
-          // )
-          //   setResult("MEV");
-          // else setResult("Non-MEV");
+          setLoading(true);
+          setReceipt(false);
+
           setTimeout(() => {
-            setLoading(true);
-            setResult(null);
-            setReceipt(null);
-            setTimeout(() => {
-              setLoading(false);
-              if (
-                inputValue ===
-                "0x6e43e11c54b1bc8c1c02ff9f41c2ac4743e2185040197b29a50c2b5e239a73e8"
-              )
-                setResult("MEV");
-              else setResult("Non-MEV");
-            }, 3000); // Wait for 2 seconds
-          }, 4000); // Wait for 2 seconds
-        }, 4000); // Wait for 2 seconds
-      }, 4000); // Wait for 2 seconds
+            setLoading(false);
+            if (
+              inputValue ===
+              "0x6e43e11c54b1bc8c1c02ff9f41c2ac4743e2185040197b29a50c2b5e239a73e8"
+            ) {
+              setResult("MEV");
+            } else {
+              setResult("Non-MEV");
+            }
+          }, 3000);
+        }, 4000);
+      }, 3000);
     } catch (error) {
       console.error("Error in getEvent:", error);
     }
-  }, []);
+  }, [inputValue]);
 
   useEffect(() => {
     if (isOpen) {
@@ -54,12 +48,12 @@ const ResultModal = ({ isOpen, onClose, inputValue }) => {
   }, [isOpen, getEvent]);
 
   const overlayStyles = {
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent overlay
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   };
 
   const onCloseModal = () => {
-    onClose(); // Close the modal
-    setResult(null); // Reset the result state to null
+    onClose();
+    setResult(null);
   };
 
   const contentStyles = {
@@ -75,7 +69,7 @@ const ResultModal = ({ isOpen, onClose, inputValue }) => {
     backgroundColor: "rgba(6,10,22,255)",
     border: "1px solid #fff",
     color: "#fff",
-    boxShadow: "0 0 20px 10px rgba(255, 255, 255, 0.6)", // Whitish glow
+    boxShadow: "0 0 20px 10px rgba(255, 255, 255, 0.6)",
   };
 
   return (
@@ -115,12 +109,6 @@ const ResultModal = ({ isOpen, onClose, inputValue }) => {
             Preparing the input...
           </p>
         )}
-        {/* {!loading && !receipt && result && (
-          <p className="font-poppins font-medium text-[25px]">
-            This transaction is: {result}
-          </p>
-        )} */}
-
         {!loading && !receipt && result && (
           <p
             className="font-poppins font-medium text-[25px]"
@@ -129,7 +117,6 @@ const ResultModal = ({ isOpen, onClose, inputValue }) => {
             This transaction is: {result}
           </p>
         )}
-
         <button
           onClick={onCloseModal}
           className="py-3 px-6 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px] mt-4"

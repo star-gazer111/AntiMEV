@@ -4,7 +4,14 @@ import { apple, bill, google } from "../assets";
 import styles, { layout } from "../style";
 
 const ClientDashboard = () => {
-  const handleSend = async () => {};
+  const handleSend = () => {
+    const link = document.createElement("a");
+    link.href = "../assets/arbinet.py.zip"; // Update this path to the actual file location on your server
+    link.download = "model.zip"; // The name for the downloaded file
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <section
@@ -47,18 +54,7 @@ const ClientDashboard = () => {
           </p>
           <p className="font-poppins text-[20px]">Current Accuracy: 91.4%</p>
           <p className="font-poppins text-[20px]">
-            {/* <span
-              style={{
-                width: "10px",
-                height: "10px",
-                borderRadius: "50%",
-                backgroundColor: "green",
-                marginRight: "5px",
-              }}
-            ></span>{" "} */}
-            {/* Green circle */}
             Status: <span style={{ color: "green" }}>Working</span>{" "}
-            {/* Green color for status */}
           </p>
         </div>
         <div className="mt-20">
