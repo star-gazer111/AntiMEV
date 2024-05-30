@@ -4,6 +4,12 @@ import GetStarted from "./GetStarted";
 import "../circle.css";
 
 const Hero = () => {
+  const bullet = {
+    color: "white",
+    marginRight: "8px",
+    fontSize: "24px",
+  };
+
   return (
     // use id=home as we want to add scroll and we can control DOM elements through id
 
@@ -52,20 +58,20 @@ const Hero = () => {
         </h2>
         <br />
         <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
-          - 7236 transactions analyzed, 91.4% more accurate than flashbots.{" "}
+          <span style={bullet}>&#9679;</span> 7236 transactions analyzed{" "}
         </p>
         <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
-          - We don't need your ABIs unlike existing solutions.
+          <span style={bullet}>&#9679;</span>91.4% more accurate than flashbots{" "}
         </p>
-        {/* 7236 transactions analyzed, 91.4% more accurate than flashbots
-        We don't need your ABIs unlike existing solutions. */}
+        <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
+          <span style={bullet}>&#9679;</span> We don't need your ABIs unlike
+          existing solutions
+        </p>
       </div>
 
       <div
         className={`flex-1 flex ${styles.flexCenter} md:my-0 my-10 relative`}
       >
-        {/* z-[5] because we wan tout robot image to appear on top of gradient */}
-        {/* <img src={robot} alt="billing" className='w-[100%] relative z-[5]'/>} */}
         <div className="relative z-[5] w-[100%] mt-10 py-2 ">
           <ol reversed className="paces" lang="en">
             <li className="pace js text-l">
