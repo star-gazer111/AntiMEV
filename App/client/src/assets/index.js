@@ -23,6 +23,7 @@ import twitter from "./twitter.svg";
 import people01 from "./people01.png";
 import people02 from "./people02.png";
 import people03 from "./people03.png";
+import mevspyLogo from "./mevspyLogo.png";
 
 export {
   airbnb,
@@ -32,6 +33,7 @@ export {
   coinbase,
   dropbox,
   logo,
+  mevspyLogo,
   quotes,
   robot,
   send,

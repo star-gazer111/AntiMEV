@@ -1,6 +1,6 @@
 import styles from "./style";
 import {
-  Billing,
+  ClientDashboard,
   Business,
   AboutUs,
   Clients,
@@ -30,7 +30,7 @@ const App = () => (
       <div className={`${styles.boxWidth}`}>
         <Stats />
         <Business />
-        <Billing />
+        <ClientDashboard />
         <AboutUs />
         <Testimonials />
         <Clients />

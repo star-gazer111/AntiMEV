@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import Button from "./Button";
-import { close, logo, menu } from "../assets";
+import { close, mevspyLogo, menu } from "../assets";
 import { navLinks } from "../constants";
 import { WalletContext } from "./Wallet";
 import "../style";
@@ -74,7 +74,7 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 w-full flex py-3 px-3 justify-between items-center bg-black bg-opacity-50 backdrop-blur-md z-50">
-      <img src={logo} alt="antiMEV" className="w-[140px] h-[45px]" />
+      <img src={mevspyLogo} alt="antiMEV" className="w-[145px] h-[50px]" />
 
       <ul className="list-none sm:flex hidden justify-end items-center flex-1">
         {navLinks.map((nav, index) => (

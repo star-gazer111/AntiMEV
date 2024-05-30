@@ -6,7 +6,7 @@ import Web3 from "web3";
 import Caller from "../contracts/Caller.json";
 
 const Business = () => {
-  const { walletAddress } = useContext(WalletContext);
+  const { walletAddress, setWalletAddress } = useContext(WalletContext);
   const [inputValue, setInputValue] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [contract, setContract] = useState(null);
@@ -14,27 +14,42 @@ const Business = () => {
 
   const networks = {
     Galadriel: {
-      rpcUrl: "https://galadriel.rpc.url",
-      contractAddress: "0xGaladrielContractAddress",
+      rpcUrl: "https://devnet.galadriel.com",
+      contractAddress: "0xa983867B114D318F3B702108847dC845A071A2c3",
     },
     FVM: {
-      rpcUrl: "https://fvm.rpc.url",
-      contractAddress: "0xFVMContractAddress",
+      rpcUrl: "https://rpc.ankr.com/filecoin_testnet",
+      contractAddress: "0x305dF1bFCF362C845b3935d97C980BA3C6d6bcEd",
     },
   };
 
   useEffect(() => {
     const loadContract = async () => {
+      if (!window.ethereum) {
+        alert("Please install MetaMask!");
+        return;
+      }
+
       const { rpcUrl, contractAddress } = networks[network];
-      const web3 = new Web3(rpcUrl);
-      const contractInstance = new web3.eth.Contract(
-        Caller.abi,
-        contractAddress
-      );
+      const web3 = new Web3(window.ethereum);
+      const contractInstance = new web3.eth.Contract(Caller, contractAddress);
       setContract(contractInstance);
     };
     loadContract();
   }, [network]);
+
+  useEffect(() => {
+    const getAccount = async () => {
+      if (window.ethereum) {
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        setWalletAddress(accounts[0]);
+      }
+    };
+
+    getAccount();
+  }, []);
 
   const handleNetworkChange = (e) => {
     setNetwork(e.target.value);
@@ -56,9 +71,15 @@ const Business = () => {
         throw new Error("Contract is not loaded.");
       }
 
-      await contract.methods
-        .requestResult(inputValue)
-        .send({ from: walletAddress });
+      const web3 = new Web3(window.ethereum);
+      const accounts = await web3.eth.getAccounts();
+      const account = accounts[0];
+
+      if (!account) {
+        throw new Error("No MetaMask account found.");
+      }
+
+      await contract.methods.requestResult(inputValue).send({ from: account });
 
       setIsModalOpen(true);
     } catch (error) {

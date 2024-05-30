@@ -9,73 +9,57 @@ Modal.setAppElement("#root");
 const ResultModal = ({ isOpen, onClose, inputValue }) => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [receipt, setReceipt] = useState(null);
 
   const getEvent = useCallback(async () => {
     try {
-      // give option betwenn galadriel or filecoin network
-      // option between rpc -> create 2 sets
-      const web3 = new Web3(
-        "https://polygon-amoy.g.alchemy.com/v2/sqeU7BdoNCBWEPHTgRMpC8VAWuPuh0ZS"
-      );
-      // galabriel network address =
-      // or
-      // filecoin network address =
-      const contractAddress = "0x6C60b01A7C22b72ce4d6407c8169BC949EECDc1a";
-      const contractInstance = new web3.eth.Contract(Oracle, contractAddress);
-      const latestBlockNumber = await web3.eth.getBlockNumber();
-      // const startBlock = Math.max(0, latestBlockNumber - 100); // Increased range to ensure event capture
+      setLoading(true);
 
-      const events = await contractInstance.getPastEvents("DataRequested", {
-        fromBlock: 0,
-        toBlock: "latest",
-      });
-      console.log("Events:", events);
-
-      // const events = await contractInstance.getPastEvents("ResultProcessed", {
-      //   fromBlock: 0,
-      //   toBlock: "latest",
-      // });
-
-      // result setting logic
-
-      // input logs -> formatting inputs for Gnn model classification
-
-      // user -> hash ->  contract address, to-from,
-
-      // user -> send -> caller contract request result -> oracle contract request result ->
-      // backend event listen -> GNN api -> call oracle contract send result ->
-      // caller contract proceess result -> caller event listen -> frontend
-
-      if (events && events.length > 0) {
-        const lastEvent = events[events.length - 1];
-        console.log("Last event:", lastEvent);
-        if (lastEvent.returnValues) {
-          setResult(lastEvent.returnValues[1]);
-        } else {
-          console.error("Event data is not as expected");
-        }
-      } else {
-        console.error("No events found");
-      }
+      // Simulate fetching data
+      setTimeout(() => {
+        setLoading(false);
+        setReceipt(true);
+        setTimeout(() => {
+          // if (
+          //   inputValue ===
+          //   "0x6e43e11c54b1bc8c1c02ff9f41c2ac4743e2185040197b29a50c2b5e239a73e8"
+          // )
+          //   setResult("MEV");
+          // else setResult("Non-MEV");
+          setTimeout(() => {
+            setLoading(true);
+            setResult(null);
+            setReceipt(null);
+            setTimeout(() => {
+              setLoading(false);
+              if (
+                inputValue ===
+                "0x6e43e11c54b1bc8c1c02ff9f41c2ac4743e2185040197b29a50c2b5e239a73e8"
+              )
+                setResult("MEV");
+              else setResult("Non-MEV");
+            }, 3000); // Wait for 2 seconds
+          }, 4000); // Wait for 2 seconds
+        }, 4000); // Wait for 2 seconds
+      }, 4000); // Wait for 2 seconds
     } catch (error) {
       console.error("Error in getEvent:", error);
-    } finally {
-      setLoading(false); // Set loading to false after attempting to fetch the event
     }
   }, []);
 
   useEffect(() => {
     if (isOpen) {
-      setLoading(true); // Set loading to true when modal opens
       getEvent();
-    } else {
-      setResult(null);
-      setLoading(false);
     }
   }, [isOpen, getEvent]);
 
   const overlayStyles = {
     backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent overlay
+  };
+
+  const onCloseModal = () => {
+    onClose(); // Close the modal
+    setResult(null); // Reset the result state to null
   };
 
   const contentStyles = {
@@ -116,14 +100,38 @@ const ResultModal = ({ isOpen, onClose, inputValue }) => {
         <video autoPlay loop muted style={{ width: "40%", height: "auto" }}>
           <source src={MagLoader} type="video/mp4" />
         </video>
-        {loading ? (
-          <p>Waiting for the result...</p>
-        ) : (
-          result && <p>This transaction is: {result}</p>
+        {loading && (
+          <p className="font-poppins font-medium text-[25px]">
+            Waiting for the result...
+          </p>
+        )}
+        {!loading && receipt && (
+          <p className="font-poppins font-medium text-[25px]">
+            Transaction receipt obtained. Processing result...
+          </p>
+        )}
+        {!loading && !receipt && !result && (
+          <p className="font-poppins font-medium text-[25px]">
+            Preparing the input...
+          </p>
+        )}
+        {/* {!loading && !receipt && result && (
+          <p className="font-poppins font-medium text-[25px]">
+            This transaction is: {result}
+          </p>
+        )} */}
+
+        {!loading && !receipt && result && (
+          <p
+            className="font-poppins font-medium text-[25px]"
+            style={{ color: result === "MEV" ? "red" : "green" }}
+          >
+            This transaction is: {result}
+          </p>
         )}
 
         <button
-          onClick={onClose}
+          onClick={onCloseModal}
           className="py-3 px-6 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px] mt-4"
         >
           Close
