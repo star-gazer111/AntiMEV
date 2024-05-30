@@ -33,9 +33,9 @@ const ResultModal = ({ isOpen, onClose, inputValue }) => {
             } else {
               setResult("Non-MEV");
             }
-          }, 3000);
-        }, 4000);
-      }, 3000);
+          }, 6000);
+        }, 6000);
+      }, 8000);
     } catch (error) {
       console.error("Error in getEvent:", error);
     }

@@ -52,7 +52,7 @@ const ClientDashboard = () => {
           </p>
           <p className="font-poppins text-[20px]">Current Accuracy: 91.4%</p>
           <p className="font-poppins text-[20px]">
-            Status: <span style={{ color: "green" }}>Working</span>{" "}
+            Status: <span style={{ color: "green" }}>Active</span>{" "}
           </p>
         </div>
         <div className="mt-20">
