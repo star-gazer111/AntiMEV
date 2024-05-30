@@ -50,9 +50,12 @@ const Hero = () => {
         >
           Transaction Integrity.
         </h2>
+        <br />
         <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
-          7236 transactions analyzed, 91.4% more accurate than flashbots We
-          don't need your ABIs unlike existing solutions.
+          - 7236 transactions analyzed, 91.4% more accurate than flashbots.{" "}
+        </p>
+        <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
+          - We don't need your ABIs unlike existing solutions.
         </p>
         {/* 7236 transactions analyzed, 91.4% more accurate than flashbots
         We don't need your ABIs unlike existing solutions. */}

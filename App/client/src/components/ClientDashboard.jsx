@@ -3,7 +3,7 @@ import React from "react";
 import { apple, bill, google } from "../assets";
 import styles, { layout } from "../style";
 
-const Billing = () => {
+const ClientDashboard = () => {
   const handleSend = async () => {};
 
   return (
@@ -87,4 +87,4 @@ const Billing = () => {
   );
 };
 
-export default Billing;
+export default ClientDashboard;
