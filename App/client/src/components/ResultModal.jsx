@@ -20,11 +20,12 @@ const ResultModal = ({ isOpen, onClose, inputValue }) => {
         setReceipt(true);
 
         setTimeout(() => {
-          setLoading(true);
-          setReceipt(false);
+          setLoading(false);
+          setReceipt(true);
 
           setTimeout(() => {
             setLoading(false);
+            setReceipt(false);
             if (
               inputValue ===
               "0x6e43e11c54b1bc8c1c02ff9f41c2ac4743e2185040197b29a50c2b5e239a73e8"
@@ -96,17 +97,17 @@ const ResultModal = ({ isOpen, onClose, inputValue }) => {
         </video>
         {loading && (
           <p className="font-poppins font-medium text-[25px]">
-            Waiting for the result...
+            Calling the oracle...
           </p>
         )}
         {!loading && receipt && (
           <p className="font-poppins font-medium text-[25px]">
-            Transaction receipt obtained. Processing result...
+            Waiting for the model to respond...
           </p>
         )}
         {!loading && !receipt && !result && (
           <p className="font-poppins font-medium text-[25px]">
-            Preparing the input...
+            Retrieving result from oracle. Processing result...
           </p>
         )}
         {!loading && !receipt && result && (
