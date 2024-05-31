@@ -222,6 +222,9 @@ const Business = () => {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         inputValue={inputValue}
+        rpcUrl={networks[network].rpcUrl}
+        contractAddress={networks[network].contractAddress}
+        network={network}
       />
     </section>
   );
