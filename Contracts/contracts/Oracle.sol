@@ -10,7 +10,7 @@ contract Oracle is Ownable{
     mapping(uint256 => address) public callbackAddress;
 
 
-    event DataRequested(uint256 indexed requestId, bytes32 inputData, string url);
+    event DataRequested(uint256 indexed requestId, uint256 blockNumber, bytes32 inputData, string url);
     event ResultProcessed(uint256 indexed requestId, uint8 result);
     
     constructor(address[] memory allowedAddresses) {
@@ -32,10 +32,10 @@ contract Oracle is Ownable{
         whitelist[_address] = false;
     }
     
-    function requestResult(uint256 requestId, bytes32 inputData, string memory url) external onlyWhitelisted {
+    function requestResult(uint256 requestId,  uint256 blockNumber, bytes32 inputData, string memory url) external onlyWhitelisted {
         require(!requestIds[requestId], "Result already requested");
         callbackAddress[requestId] = msg.sender;
-        emit DataRequested(requestId, inputData, url);
+        emit DataRequested(requestId, blockNumber, inputData, url);
     }
     
     function sendResult(uint256 requestId, uint8 result) external returns (uint8) {

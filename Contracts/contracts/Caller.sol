@@ -26,9 +26,9 @@ contract Caller {
         _;
     }
 
-    function requestResult(bytes32 transactionData) public returns (uint256) {
+    function requestResult(uint256 blockNumber, bytes32 transactionData) public returns (uint256) {
         requestID += 1;
-        oracle.requestResult(requestID, transactionData, url);
+        oracle.requestResult(requestID, blockNumber, transactionData, url);
     }
 
     function processResult(uint256 _requestID, uint8 result) public onlyOracle returns (uint8) {

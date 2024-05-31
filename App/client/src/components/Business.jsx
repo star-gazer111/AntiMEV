@@ -7,7 +7,8 @@ import Caller from "../contracts/Caller.json";
 
 const Business = () => {
   const { walletAddress, setWalletAddress } = useContext(WalletContext);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue1, setInputValue1] = useState("");
+  const [inputValue2, setInputValue2] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [contract, setContract] = useState(null);
   const [network, setNetwork] = useState("Galadriel");
@@ -79,7 +80,9 @@ const Business = () => {
         throw new Error("No MetaMask account found.");
       }
 
-      await contract.methods.requestResult(inputValue).send({ from: account });
+      await contract.methods
+        .requestResult(inputValue1, inputValue2)
+        .send({ from: account });
 
       setIsModalOpen(true);
     } catch (error) {
@@ -179,9 +182,31 @@ const Business = () => {
 
           <input
             type="text"
+            placeholder="Enter block number"
+            value={inputValue1}
+            onChange={(e) => setInputValue1(e.target.value)}
+            style={{
+              backgroundColor: "transparent",
+              border: "none",
+              color: "#fff",
+              outline: "none",
+              width: "100%",
+              marginBottom: "30px",
+              textAlign: "center",
+              fontSize: "18px",
+              boxShadow: "0 0 20px rgba(255, 255, 255, 0.5)",
+              background:
+                "linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%)",
+              padding: "15px",
+              borderRadius: "10px",
+            }}
+          />
+
+          <input
+            type="text"
             placeholder="Enter the transaction hash"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            value={inputValue2}
+            onChange={(e) => setInputValue2(e.target.value)}
             style={{
               backgroundColor: "transparent",
               border: "none",
@@ -221,10 +246,12 @@ const Business = () => {
       <ResultModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        inputValue={inputValue}
+        inputValue1={inputValue1}
+        inputValue2={inputValue2}
         rpcUrl={networks[network].rpcUrl}
         contractAddress={networks[network].contractAddress}
         network={network}
+        walletAddress={walletAddress}
       />
     </section>
   );

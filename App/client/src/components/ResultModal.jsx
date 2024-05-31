@@ -160,6 +160,348 @@
 
 // export default ResultModal;
 
+// import React, { useState, useEffect, useCallback } from "react";
+// import Modal from "react-modal";
+// import MagLoader from "../assets/MagLoader.mp4";
+// import Web3 from "web3";
+// import Oracle from "../contracts/Oracle.json";
+// import Caller from "../contracts/Caller.json";
+// import axios from "axios"; // Import axios for API calls
+
+// Modal.setAppElement("#root");
+
+// const ResultModal = ({
+//   isOpen,
+//   onClose,
+//   inputValue,
+//   rpcUrl,
+//   contractAddress,
+//   network,
+// }) => {
+//   const [result, setResult] = useState(null);
+//   const [loading, setLoading] = useState(false);
+//   const [receipt, setReceipt] = useState(null);
+//   const [contract, setContract] = useState(null);
+
+//   const contractAdd = "0xB0dF15F9B4C51963471cDE838E55F744Ae90f7C1";
+
+//   useEffect(() => {
+//     const loadContract = async () => {
+//       if (!window.ethereum) {
+//         alert("Please install MetaMask!");
+//         return;
+//       }
+
+//       if (network === "FVM") {
+//         const contractAdd = "0xa983867B114D318F3B702108847dC845A071A2c3";
+//       }
+
+//       const web3 = new Web3(window.ethereum);
+//       const contractInstance = new web3.eth.Contract(Oracle, contractAdd);
+//       setContract(contractInstance);
+//     };
+//     loadContract();
+//   }, [contractAdd]);
+
+//   const subscribe = useCallback(() => {
+//     if (!contract) return;
+
+//     const events = contract.events.DataRequested();
+
+//     events
+//       .on("data", async (d) => {
+//         console.log("DataRequested event:", d);
+//         const { requestId, inputData, url } = d.returnValues;
+//         console.log("Request ID:", requestId);
+//         console.log("Input data:", inputData);
+//         console.log("URL:", url);
+
+//         try {
+//           // const apiResponse = await axios.get(url);
+//           // const apiResult = apiResponse.data;
+//           const apiResult = "MEV"; // Hardcoded for testing
+
+//           // Use the API result to call a smart contract function
+//           const wallet = Web3.eth.accounts.wallet.add(""); // process.env.PRIVATE_KEY
+//           const receipt = await contract.methods
+//             .sendResult(requestId, apiResult)
+//             .send({ from: wallet[0].address });
+
+//           if (receipt) {
+//             setReceipt(receipt);
+//             console.log("Receipt:", receipt);
+//           }
+
+//           // setReceipt(receipt);
+//           // setResult(apiResult);
+//           // setLoading(true);
+//         } catch (error) {
+//           console.error("Error in API call or contract method:", error);
+//           // setLoading(false);
+//         }
+//       })
+//       .on("error", (error) => {
+//         console.error("Error in event subscription:", error);
+//       });
+//   }, [contract]);
+
+//   useEffect(() => {
+//     if (isOpen) {
+//       subscribe();
+//     }
+//   }, [isOpen, subscribe]);
+
+//   const overlayStyles = {
+//     backgroundColor: "rgba(0, 0, 0, 0.5)",
+//   };
+
+//   const onCloseModal = () => {
+//     onClose();
+//     setResult(null);
+//     setReceipt(null);
+//   };
+
+//   const contentStyles = {
+//     position: "absolute",
+//     top: "50%",
+//     left: "50%",
+//     transform: "translate(-50%, -50%)",
+//     borderRadius: "10px",
+//     padding: "20px",
+//     width: "58%",
+//     maxWidth: "80%",
+//     height: "70%",
+//     backgroundColor: "rgba(6,10,22,255)",
+//     border: "1px solid #fff",
+//     color: "#fff",
+//     boxShadow: "0 0 20px 10px rgba(255, 255, 255, 0.6)",
+//   };
+
+//   return (
+//     <Modal
+//       isOpen={isOpen}
+//       onRequestClose={onClose}
+//       contentLabel="Transaction Hash Modal"
+//       style={{
+//         overlay: overlayStyles,
+//         content: contentStyles,
+//       }}
+//     >
+//       <div
+//         style={{
+//           display: "flex",
+//           flexDirection: "column",
+//           alignItems: "center",
+//           justifyContent: "space-between",
+//           height: "100%",
+//         }}
+//       >
+//         <video autoPlay loop muted style={{ width: "40%", height: "auto" }}>
+//           <source src={MagLoader} type="video/mp4" />
+//         </video>
+//         {loading && (
+//           <p className="font-poppins font-medium text-[25px]">
+//             Calling the oracle...
+//           </p>
+//         )}
+//         {!loading && receipt && (
+//           <p className="font-poppins font-medium text-[25px]">
+//             Transaction completed!
+//           </p>
+//         )}
+//         {!loading && result && (
+//           <p
+//             className="font-poppins font-medium text-[25px]"
+//             style={{ color: result === "MEV" ? "red" : "green" }}
+//           >
+//             This transaction is: {result}
+//           </p>
+//         )}
+//         <button
+//           onClick={onCloseModal}
+//           className="py-3 px-6 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px] mt-4"
+//         >
+//           Close
+//         </button>
+//       </div>
+//     </Modal>
+//   );
+// };
+
+// export default ResultModal;
+
+// import React, { useState, useEffect, useCallback } from "react";
+// import Modal from "react-modal";
+// import MagLoader from "../assets/MagLoader.mp4";
+// import Web3 from "web3";
+// import Oracle from "../contracts/Oracle.json";
+// import Caller from "../contracts/Caller.json";
+// import axios from "axios"; // Import axios for API calls
+
+// Modal.setAppElement("#root");
+
+// const ResultModal = ({
+//   isOpen,
+//   onClose,
+//   inputValue,
+//   rpcUrl,
+//   contractAddress,
+//   network,
+// }) => {
+//   const [result, setResult] = useState(null);
+//   const [loading, setLoading] = useState(false);
+//   const [receipt, setReceipt] = useState(null);
+//   const [contract, setContract] = useState(null);
+
+//   const contractAdd = "0xB0dF15F9B4C51963471cDE838E55F744Ae90f7C1";
+//   const pollingInterval = 5000; // 5 seconds
+//   const pollingTimeout = 600000; // 10 minutes
+
+//   useEffect(() => {
+//     const loadContract = async () => {
+//       if (!window.ethereum) {
+//         alert("Please install MetaMask!");
+//         return;
+//       }
+
+//       if (network === "FVM") {
+//         const contractAdd = "0xa983867B114D318F3B702108847dC845A071A2c3";
+//       }
+
+//       const web3 = new Web3(window.ethereum);
+//       const contractInstance = new web3.eth.Contract(Oracle, contractAdd);
+//       setContract(contractInstance);
+//     };
+//     loadContract();
+//   }, [contractAdd, network]);
+
+//   const pollForEvent = useCallback(
+//     async (startTime) => {
+//       if (!contract) return;
+
+//       try {
+//         console.log("Polling for events...");
+//         const events = await contract.getPastEvents("DataRequested", {
+//           fromBlock: "latest",
+//           toBlock: "latest",
+//         });
+//         console.log("Received events:", events);
+
+//         if (events.length > 0) {
+//           // Process the event
+//           console.log("Processing event...");
+//           const d = events[0];
+//           console.log("DataRequested event:", d);
+//           const { requestId, inputData, url } = d.returnValues;
+//           console.log("Request ID:", requestId);
+//           console.log("Input data:", inputData);
+//           console.log("URL:", url);
+
+//           // Call API and send result to contract...
+//         } else {
+//           // Continue polling
+//           const currentTime = Date.now();
+//           if (currentTime - startTime < pollingTimeout) {
+//             console.log("No events found. Waiting for next poll...");
+//             setTimeout(() => pollForEvent(startTime), pollingInterval);
+//           } else {
+//             console.error("Polling timed out.");
+//           }
+//         }
+//       } catch (error) {
+//         console.error("Error in polling for event:", error);
+//       }
+//     },
+//     [contract, pollingInterval, pollingTimeout]
+//   );
+
+//   useEffect(() => {
+//     if (isOpen) {
+//       console.log("Modal is open. Starting event polling...");
+//       const startTime = Date.now();
+//       pollForEvent(startTime);
+//     }
+//   }, [isOpen, pollForEvent]);
+
+//   const overlayStyles = {
+//     backgroundColor: "rgba(0, 0, 0, 0.5)",
+//   };
+
+//   const onCloseModal = () => {
+//     onClose();
+//     setResult(null);
+//     setReceipt(null);
+//   };
+
+//   const contentStyles = {
+//     position: "absolute",
+//     top: "50%",
+//     left: "50%",
+//     transform: "translate(-50%, -50%)",
+//     borderRadius: "10px",
+//     padding: "20px",
+//     width: "58%",
+//     maxWidth: "80%",
+//     height: "70%",
+//     backgroundColor: "rgba(6,10,22,255)",
+//     border: "1px solid #fff",
+//     color: "#fff",
+//     boxShadow: "0 0 20px 10px rgba(255, 255, 255, 0.6)",
+//   };
+
+//   return (
+//     <Modal
+//       isOpen={isOpen}
+//       onRequestClose={onClose}
+//       contentLabel="Transaction Hash Modal"
+//       style={{
+//         overlay: overlayStyles,
+//         content: contentStyles,
+//       }}
+//     >
+//       <div
+//         style={{
+//           display: "flex",
+//           flexDirection: "column",
+//           alignItems: "center",
+//           justifyContent: "space-between",
+//           height: "100%",
+//         }}
+//       >
+//         <video autoPlay loop muted style={{ width: "40%", height: "auto" }}>
+//           <source src={MagLoader} type="video/mp4" />
+//         </video>
+//         {loading && (
+//           <p className="font-poppins font-medium text-[25px]">
+//             Calling the oracle...
+//           </p>
+//         )}
+//         {!loading && receipt && (
+//           <p className="font-poppins font-medium text-[25px]">
+//             Transaction completed!
+//           </p>
+//         )}
+//         {!loading && result && (
+//           <p
+//             className="font-poppins font-medium text-[25px]"
+//             style={{ color: result === "MEV" ? "red" : "green" }}
+//           >
+//             This transaction is: {result}
+//           </p>
+//         )}
+//         <button
+//           onClick={onCloseModal}
+//           className="py-3 px-6 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px] mt-4"
+//         >
+//           Close
+//         </button>
+//       </div>
+//     </Modal>
+//   );
+// };
+
+// export default ResultModal;
+
 import React, { useState, useEffect, useCallback } from "react";
 import Modal from "react-modal";
 import MagLoader from "../assets/MagLoader.mp4";
@@ -170,20 +512,17 @@ import axios from "axios"; // Import axios for API calls
 
 Modal.setAppElement("#root");
 
-const ResultModal = ({
-  isOpen,
-  onClose,
-  inputValue,
-  rpcUrl,
-  contractAddress,
-  network,
-}) => {
+const ResultModal = ({ isOpen, onClose, rpcUrl, contractAddress, network }) => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [receipt, setReceipt] = useState(null);
   const [contract, setContract] = useState(null);
 
   const contractAdd = "0xB0dF15F9B4C51963471cDE838E55F744Ae90f7C1";
+
+  // const parseRequestId = (requestId) => {
+  //   return Web3.utils.toBN(requestId);
+  // };
 
   useEffect(() => {
     const loadContract = async () => {
@@ -199,55 +538,54 @@ const ResultModal = ({
       const web3 = new Web3(window.ethereum);
       const contractInstance = new web3.eth.Contract(Oracle, contractAdd);
       setContract(contractInstance);
+
+      // Subscribe to the event
+      contractInstance.events
+        .DataRequested()
+        .on("data", async (d) => {
+          console.log("DataRequested event:", d);
+          const { requestId, inputData, url } = d.returnValues;
+          console.log("Request ID:", requestId);
+          console.log("Input data:", inputData);
+          console.log("URL:", url);
+
+          // convert request ID
+          // requestId = parseRequestId(requestId);
+
+          try {
+            // const apiResponse = await axios.get(url);
+            // const apiResult = apiResponse.data;
+            const apiResult = 0; // Hardcoded for testing
+
+            // Use the API result to call a smart contract function
+            const privateKey =
+              "0xbf593679f8b0f5f416906c15efe318f4948ed1fd54d61ccde3ecf24f3d2e1f30";
+            const wallet = web3.eth.accounts.wallet.add(privateKey);
+            console.log("Wallet address:", wallet[0].address);
+            const Oraclecontract = new web3.eth.Contract(Oracle, contractAdd);
+            const receipt2 = Oraclecontract.methods
+              .sendResult(1, 0)
+              .send({ from: wallet[0].address });
+
+            if (receipt2) {
+              setReceipt(receipt2);
+              console.log("Receipt:", receipt2);
+            }
+
+            // setReceipt(receipt);
+            // setResult(apiResult);
+            // setLoading(true);
+          } catch (error) {
+            console.error("Error in API call or contract method:", error);
+            // setLoading(false);
+          }
+        })
+        .on("error", (error) => {
+          console.error("Error in event subscription:", error);
+        });
     };
     loadContract();
-  }, [contractAdd]);
-
-  const subscribe = useCallback(() => {
-    if (!contract) return;
-
-    contract.events
-      .DataRequested()
-      .on("data", async (event) => {
-        console.log("DataRequested event:", event);
-        const { requestId, inputData, url } = event.returnValues;
-        console.log("Request ID:", requestId);
-        console.log("Input data:", inputData);
-        console.log("URL:", url);
-
-        try {
-          const apiResponse = await axios.get(url);
-          const apiResult = apiResponse.data;
-
-          // Use the API result to call a smart contract function
-          const wallet = Web3.eth.accounts.wallet.add(""); // process.env.PRIVATE_KEY
-          const receipt = await contract.methods
-            .sendResult(requestId, apiResult)
-            .send({ from: wallet[0].address });
-
-          if (receipt) {
-            setReceipt(receipt);
-            console.log("Receipt:", receipt);
-          }
-
-          // setReceipt(receipt);
-          // setResult(apiResult);
-          // setLoading(true);
-        } catch (error) {
-          console.error("Error in API call or contract method:", error);
-          // setLoading(false);
-        }
-      })
-      .on("error", (error) => {
-        console.error("Error in event subscription:", error);
-      });
-  }, [contract]);
-
-  useEffect(() => {
-    if (isOpen) {
-      subscribe();
-    }
-  }, [isOpen, subscribe]);
+  }, [contractAdd, network]);
 
   const overlayStyles = {
     backgroundColor: "rgba(0, 0, 0, 0.5)",
