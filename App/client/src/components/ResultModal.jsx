@@ -682,10 +682,10 @@ const ResultModal = ({ isOpen, onClose, rpcUrl, contractAddress, network }) => {
   const [contract, setContract] = useState(null);
   const [eventSubscription, setEventSubscription] = useState(null);
 
-  const defaultContractAdd = "0xB0dF15F9B4C51963471cDE838E55F744Ae90f7C1";
+  const defaultContractAdd = "0x1451b655Dc3F487e1DF200c952FBDab65F395729";
   const contractAdd =
     network === "FVM"
-      ? "0xa983867B114D318F3B702108847dC845A071A2c3"
+      ? "0xF777d0F5ac96A1470AE40930AeD816Cd96b6c390"
       : defaultContractAdd;
 
   useEffect(() => {

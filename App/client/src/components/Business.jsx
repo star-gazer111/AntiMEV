@@ -16,11 +16,11 @@ const Business = () => {
   const networks = {
     Galadriel: {
       rpcUrl: "https://devnet.galadriel.com",
-      contractAddress: "0xa983867B114D318F3B702108847dC845A071A2c3",
+      contractAddress: "0xc527D9Bc8faBDB3aCD7e1961077CD8BAB84Be257",
     },
     FVM: {
       rpcUrl: "https://rpc.ankr.com/filecoin_testnet",
-      contractAddress: "0x305dF1bFCF362C845b3935d97C980BA3C6d6bcEd",
+      contractAddress: "0xC582c05c3AeD0c08bE686c0E98C6cb24C74E21A1",
     },
   };
 
@@ -81,7 +81,9 @@ const Business = () => {
         throw new Error("No MetaMask account found.");
       }
 
-      await contract.methods.requestResult(inputValue2).send({ from: account });
+      await contract.methods
+        .requestResult(inputValue1, inputValue2)
+        .send({ from: account });
 
       setIsModalOpen(true);
     } catch (error) {
