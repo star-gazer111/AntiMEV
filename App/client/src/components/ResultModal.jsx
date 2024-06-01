@@ -666,170 +666,172 @@
 
 // export default ResultModal;
 
-import React, { useState, useEffect } from "react";
-import Modal from "react-modal";
-import MagLoader from "../assets/MagLoader.mp4";
-import Web3 from "web3";
-import Oracle from "../contracts/Oracle.json";
-import axios from "axios";
+// THIS WAS WORKING
+// -------------------------------------------------------------------------
+// import React, { useState, useEffect } from "react";
+// import Modal from "react-modal";
+// import MagLoader from "../assets/MagLoader.mp4";
+// import Web3 from "web3";
+// import Oracle from "../contracts/Oracle.json";
+// import axios from "axios";
 
-Modal.setAppElement("#root");
+// Modal.setAppElement("#root");
 
-const ResultModal = ({ isOpen, onClose, rpcUrl, contractAddress, network }) => {
-  const [result, setResult] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [receipt, setReceipt] = useState(null);
-  const [contract, setContract] = useState(null);
-  const [eventSubscription, setEventSubscription] = useState(null);
+// const ResultModal = ({ isOpen, onClose, rpcUrl, contractAddress, network }) => {
+//   const [result, setResult] = useState(null);
+//   const [loading, setLoading] = useState(false);
+//   const [receipt, setReceipt] = useState(null);
+//   const [contract, setContract] = useState(null);
+//   const [eventSubscription, setEventSubscription] = useState(null);
 
-  const defaultContractAdd = "0x1451b655Dc3F487e1DF200c952FBDab65F395729";
-  const contractAdd =
-    network === "FVM"
-      ? "0xF777d0F5ac96A1470AE40930AeD816Cd96b6c390"
-      : defaultContractAdd;
+//   const defaultContractAdd = "0x1451b655Dc3F487e1DF200c952FBDab65F395729";
+//   const contractAdd =
+//     network === "FVM"
+//       ? "0xF777d0F5ac96A1470AE40930AeD816Cd96b6c390"
+//       : defaultContractAdd;
 
-  useEffect(() => {
-    const loadContract = async () => {
-      if (!window.ethereum) {
-        alert("Please install MetaMask!");
-        return;
-      }
+//   useEffect(() => {
+//     const loadContract = async () => {
+//       if (!window.ethereum) {
+//         alert("Please install MetaMask!");
+//         return;
+//       }
 
-      const web3 = new Web3(window.ethereum);
-      const contractInstance = new web3.eth.Contract(Oracle, contractAdd);
-      setContract(contractInstance);
+//       const web3 = new Web3(window.ethereum);
+//       const contractInstance = new web3.eth.Contract(Oracle, contractAdd);
+//       setContract(contractInstance);
 
-      const subscription = contractInstance.events
-        .DataRequested()
-        .on("data", async (d) => {
-          console.log("DataRequested event:", d);
-          const { requestId, inputData, url } = d.returnValues;
-          console.log("Request ID:", requestId);
-          console.log("Input data:", inputData);
-          console.log("URL:", url);
+//       const subscription = contractInstance.events
+//         .DataRequested()
+//         .on("data", async (d) => {
+//           console.log("DataRequested event:", d);
+//           const { requestId, inputData, url } = d.returnValues;
+//           console.log("Request ID:", requestId);
+//           console.log("Input data:", inputData);
+//           console.log("URL:", url);
 
-          try {
-            // Uncomment this if you're making an actual API call
-            // const apiResponse = await axios.get(url);
-            // const apiResult = apiResponse.data;
+//           try {
+//             // Uncomment this if you're making an actual API call
+//             // const apiResponse = await axios.get(url);
+//             // const apiResult = apiResponse.data;
 
-            const apiResult = 0; // Hardcoded for testing
+//             const apiResult = 0; // Hardcoded for testing
 
-            const accounts = await web3.eth.getAccounts();
-            const account = accounts[0];
-            console.log("Account:", account);
+//             const accounts = await web3.eth.getAccounts();
+//             const account = accounts[0];
+//             console.log("Account:", account);
 
-            const receipt2 = await contractInstance.methods
-              .sendResult(5, apiResult)
-              .send({
-                from: account,
-              });
+//             const receipt2 = await contractInstance.methods
+//               .sendResult(5, apiResult)
+//               .send({
+//                 from: account,
+//               });
 
-            console.log("Receipt:", receipt2);
+//             console.log("Receipt:", receipt2);
 
-            setReceipt(receipt2);
-            setResult(apiResult);
-            setLoading(false);
-          } catch (error) {
-            console.error("Error in API call or contract method:", error);
-            setLoading(false);
-          }
-        })
-        .on("error", (error) => {
-          console.error("Error in event subscription:", error);
-        });
+//             setReceipt(receipt2);
+//             setResult(apiResult);
+//             setLoading(false);
+//           } catch (error) {
+//             console.error("Error in API call or contract method:", error);
+//             setLoading(false);
+//           }
+//         })
+//         .on("error", (error) => {
+//           console.error("Error in event subscription:", error);
+//         });
 
-      setEventSubscription(subscription);
+//       setEventSubscription(subscription);
 
-      // Cleanup function to unsubscribe from event when component unmounts
-      return () => {
-        if (subscription) {
-          subscription.unsubscribe();
-        }
-      };
-    };
+//       // Cleanup function to unsubscribe from event when component unmounts
+//       return () => {
+//         if (subscription) {
+//           subscription.unsubscribe();
+//         }
+//       };
+//     };
 
-    loadContract();
-  }, [network, contractAdd]);
+//     loadContract();
+//   }, [network, contractAdd]);
 
-  const overlayStyles = {
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  };
+//   const overlayStyles = {
+//     backgroundColor: "rgba(0, 0, 0, 0.5)",
+//   };
 
-  const onCloseModal = () => {
-    onClose();
-    setResult(null);
-    setReceipt(null);
-  };
+//   const onCloseModal = () => {
+//     onClose();
+//     setResult(null);
+//     setReceipt(null);
+//   };
 
-  const contentStyles = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    borderRadius: "10px",
-    padding: "20px",
-    width: "58%",
-    maxWidth: "80%",
-    height: "70%",
-    backgroundColor: "rgba(6,10,22,255)",
-    border: "1px solid #fff",
-    color: "#fff",
-    boxShadow: "0 0 20px 10px rgba(255, 255, 255, 0.6)",
-  };
+//   const contentStyles = {
+//     position: "absolute",
+//     top: "50%",
+//     left: "50%",
+//     transform: "translate(-50%, -50%)",
+//     borderRadius: "10px",
+//     padding: "20px",
+//     width: "58%",
+//     maxWidth: "80%",
+//     height: "70%",
+//     backgroundColor: "rgba(6,10,22,255)",
+//     border: "1px solid #fff",
+//     color: "#fff",
+//     boxShadow: "0 0 20px 10px rgba(255, 255, 255, 0.6)",
+//   };
 
-  return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      contentLabel="Transaction Hash Modal"
-      style={{
-        overlay: overlayStyles,
-        content: contentStyles,
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "space-between",
-          height: "100%",
-        }}
-      >
-        <video autoPlay loop muted style={{ width: "40%", height: "auto" }}>
-          <source src={MagLoader} type="video/mp4" />
-        </video>
-        {loading && (
-          <p className="font-poppins font-medium text-[25px]">
-            Calling the oracle...
-          </p>
-        )}
-        {!loading && receipt && (
-          <p className="font-poppins font-medium text-[25px]">
-            Transaction completed!
-          </p>
-        )}
-        {!loading && result !== null && (
-          <p
-            className="font-poppins font-medium text-[25px]"
-            style={{ color: result === "MEV" ? "red" : "green" }}
-          >
-            This transaction is: {result}
-          </p>
-        )}
-        <button
-          onClick={onCloseModal}
-          className="py-3 px-6 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px] mt-4"
-        >
-          Close
-        </button>
-      </div>
-    </Modal>
-  );
-};
+//   return (
+//     <Modal
+//       isOpen={isOpen}
+//       onRequestClose={onClose}
+//       contentLabel="Transaction Hash Modal"
+//       style={{
+//         overlay: overlayStyles,
+//         content: contentStyles,
+//       }}
+//     >
+//       <div
+//         style={{
+//           display: "flex",
+//           flexDirection: "column",
+//           alignItems: "center",
+//           justifyContent: "space-between",
+//           height: "100%",
+//         }}
+//       >
+//         <video autoPlay loop muted style={{ width: "40%", height: "auto" }}>
+//           <source src={MagLoader} type="video/mp4" />
+//         </video>
+//         {loading && (
+//           <p className="font-poppins font-medium text-[25px]">
+//             Calling the oracle...
+//           </p>
+//         )}
+//         {!loading && receipt && (
+//           <p className="font-poppins font-medium text-[25px]">
+//             Transaction completed!
+//           </p>
+//         )}
+//         {!loading && result !== null && (
+//           <p
+//             className="font-poppins font-medium text-[25px]"
+//             style={{ color: result === "MEV" ? "red" : "green" }}
+//           >
+//             This transaction is: {result}
+//           </p>
+//         )}
+//         <button
+//           onClick={onCloseModal}
+//           className="py-3 px-6 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px] mt-4"
+//         >
+//           Close
+//         </button>
+//       </div>
+//     </Modal>
+//   );
+// };
 
-export default ResultModal;
+// export default ResultModal;
 
 // import React, { useState, useEffect } from "react";
 // import Modal from "react-modal";
@@ -978,3 +980,167 @@ export default ResultModal;
 // };
 
 // export default ResultModal;
+
+import React, { useState, useEffect, useRef } from "react";
+import Modal from "react-modal";
+import MagLoader from "../assets/MagLoader.mp4";
+import Web3 from "web3";
+import Oracle from "../contracts/Oracle.json";
+import axios from "axios";
+
+Modal.setAppElement("#root");
+
+const ResultModal = ({ isOpen, onClose, rpcUrl, contractAddress, network }) => {
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [receipt, setReceipt] = useState(null);
+  const [contract, setContract] = useState(null);
+  const [account, setAccount] = useState(null);
+  const subscriptionRef = useRef(null);
+
+  const defaultContractAdd = "0xC582c05c3AeD0c08bE686c0E98C6cb24C74E21A1";
+  const contractAdd =
+    network === "FVM"
+      ? "0xb3b2802AFb7399Fa45145F02064538C33174D7FB"
+      : defaultContractAdd;
+
+  useEffect(() => {
+    const loadContract = async () => {
+      // Your existing code...
+
+      // Only set up event listener if it hasn't been set up yet
+      if (!subscriptionRef.current) {
+        // Listen for future events
+        const subscription = contractInstance.events
+          .DataRequested()
+          .on("data", handleEvent)
+          .on("error", (error) => {
+            console.error("Error in event subscription:", error);
+          });
+
+        // Store the subscription reference
+        subscriptionRef.current = subscription;
+      }
+    };
+
+    loadContract();
+
+    // Cleanup function to unsubscribe from event when component unmounts
+    return () => {
+      if (subscriptionRef.current) {
+        subscriptionRef.current.unsubscribe();
+        subscriptionRef.current = null;
+      }
+    };
+  }, [contractAdd]); // Use contractAdd as dependency to ensure this effect runs only once per contract address
+
+  const handleEvent = async (event) => {
+    console.log("DataRequested event:", event);
+    const { requestId, inputData, url } = event.returnValues;
+    console.log("Request ID:", requestId);
+    console.log(typeof requestId);
+    console.log("Input data:", inputData);
+    console.log("URL:", url);
+
+    setLoading(true);
+
+    try {
+      // Uncomment this if you're making an actual API call
+      // const apiResponse = await axios.get(url);
+      // const apiResult = apiResponse.data;
+
+      const apiResult = "MEV"; // Hardcoded for testing
+
+      const receipt2 = await contract.methods
+        .sendResult(requestId, apiResult)
+        .send({ from: account });
+
+      console.log("Receipt:", receipt2);
+
+      setReceipt(receipt2);
+      setResult(apiResult);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error in API call or contract method:", error);
+      setLoading(false);
+    }
+  };
+
+  const overlayStyles = {
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  };
+
+  const onCloseModal = () => {
+    onClose();
+    setResult(null);
+    setReceipt(null);
+  };
+
+  const contentStyles = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    borderRadius: "10px",
+    padding: "20px",
+    width: "58%",
+    maxWidth: "80%",
+    height: "70%",
+    backgroundColor: "rgba(6,10,22,255)",
+    border: "1px solid #fff",
+    color: "#fff",
+    boxShadow: "0 0 20px 10px rgba(255, 255, 255, 0.6)",
+  };
+
+  return (
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      contentLabel="Transaction Hash Modal"
+      style={{
+        overlay: overlayStyles,
+        content: contentStyles,
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "space-between",
+          height: "100%",
+        }}
+      >
+        <video autoPlay loop muted style={{ width: "40%", height: "auto" }}>
+          <source src={MagLoader} type="video/mp4" />
+        </video>
+        {loading && (
+          <p className="font-poppins font-medium text-[25px]">
+            Calling the oracle...
+          </p>
+        )}
+        {!loading && receipt && (
+          <p className="font-poppins font-medium text-[25px]">
+            Transaction completed!
+          </p>
+        )}
+        {!loading && result !== null && (
+          <p
+            className="font-poppins font-medium text-[25px]"
+            style={{ color: result === "MEV" ? "red" : "green" }}
+          >
+            This transaction is: {result}
+          </p>
+        )}
+        <button
+          onClick={onCloseModal}
+          className="py-3 px-6 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px] mt-4"
+        >
+          Close
+        </button>
+      </div>
+    </Modal>
+  );
+};
+
+export default ResultModal;

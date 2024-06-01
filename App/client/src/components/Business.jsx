@@ -16,11 +16,11 @@ const Business = () => {
   const networks = {
     Galadriel: {
       rpcUrl: "https://devnet.galadriel.com",
-      contractAddress: "0xc527D9Bc8faBDB3aCD7e1961077CD8BAB84Be257",
+      contractAddress: "0x6383D7B0021A7fF2094d3C7E7fA791b86E941E1D",
     },
     FVM: {
       rpcUrl: "https://rpc.ankr.com/filecoin_testnet",
-      contractAddress: "0xC582c05c3AeD0c08bE686c0E98C6cb24C74E21A1",
+      contractAddress: "0xEA32f97F52e689c9106Ffb6Fac78AB307572F99D",
     },
   };
 
