@@ -11,7 +11,7 @@ contract Oracle is Ownable{
 
 
     event DataRequested(uint256 indexed requestId, uint256 blockNumber, bytes32 inputData, string url);
-    event ResultProcessed(uint256 indexed requestId, uint8 result);
+    event ResultProcessed(uint256 indexed requestId, string result);
     
     constructor(address[] memory allowedAddresses) {
         for (uint256 i = 0; i < allowedAddresses.length; i++) {
@@ -38,7 +38,7 @@ contract Oracle is Ownable{
         emit DataRequested(requestId, blockNumber, inputData, url);
     }
     
-    function sendResult(uint256 requestId, uint8 result) external returns (uint8) {
+    function sendResult(uint256 requestId, string memory result) external returns (uint8) {
         require(!requestIds[requestId], "Result already sent");
         requestIds[requestId] = true;
         ICaller(callbackAddress[requestId]).processResult(requestId, result);
