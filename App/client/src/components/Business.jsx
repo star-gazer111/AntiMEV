@@ -57,7 +57,8 @@ const Business = () => {
   };
 
   const handleReset = () => {
-    setInputValue("");
+    setInputValue1("");
+    setInputValue2("");
   };
 
   const handleSend = async () => {
@@ -80,9 +81,7 @@ const Business = () => {
         throw new Error("No MetaMask account found.");
       }
 
-      await contract.methods
-        .requestResult(inputValue1, inputValue2)
-        .send({ from: account });
+      await contract.methods.requestResult(inputValue2).send({ from: account });
 
       setIsModalOpen(true);
     } catch (error) {
