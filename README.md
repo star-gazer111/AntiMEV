@@ -44,8 +44,7 @@ The final part is the user side. The trained model is hosted as an API (See more
 | Contracts | Filecoin Testnet(FVM) |
 |-----------|------------------|
 | [Oracle](https://github.com/star-gazer111/MEVSpy/blob/main/Contracts/contracts/Oracle.sol) | [t410fn3meae2jwkg2bvjsk4awog3jkgzzp2h4qv2opzq](https://calibration.filfox.info/en/address/0x6Ed8401349B28DA0D5325701671b6951b397E8FC)| 
-| [Caller](https://github.com/star-gazer111/MEVSpy/blob/061e898011b0197a55dfeae8cf9f983572b0c4d9/Contracts/contracts/Caller.sol) |[t410fu7cq7fiedpwuthckdk5pb52dbgt77iuhtrea5aa]
-(https://calibration.filfox.info/en/address/0xA7c50F95041beD499C4a1aBAf0f74309a7ffa287) | 
+| [Caller](https://github.com/star-gazer111/MEVSpy/blob/main/Contracts/contracts/Caller.sol) |[t410fu7cq7fiedpwuthckdk5pb52dbgt77iuhtrea5aa](https://calibration.filfox.info/en/address/0xA7c50F95041beD499C4a1aBAf0f74309a7ffa287)| 
 
 Check out below on how to use it.
 
