@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "MEVSpy"
+version = "0.1.0"
+description = "A description of your project"
+authors = ["star-gazer111 <vasu_k@ee.iitr.ac.in>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+httpx = "^0.22.0"
+loguru = "^0.5.3"
+pytest = "^6.2"
+tenacity = "^8.0.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2"
+pytest-asyncio = "^0.15.1"  # For testing async functions
+mock = "^4.0.3"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
