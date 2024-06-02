@@ -3,12 +3,10 @@ import {
   ClientDashboard,
   Business,
   AboutUs,
-  Clients,
   CTA,
-  Footer,
   Navbar,
   Stats,
-  Testimonials,
+  Insights,
   Hero,
 } from "./components";
 
@@ -32,10 +30,8 @@ const App = () => (
         <Business />
         <ClientDashboard />
         <AboutUs />
-        <Testimonials />
-        <Clients />
+        <Insights />
         <CTA />
-        <Footer />
       </div>
     </div>
   </div>

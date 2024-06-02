@@ -76,15 +76,17 @@ const ResultModal = ({
                 setLoading(true);
 
                 try {
-                  function getRandomKeyword() {
-                    const keywords = ["MEV", "NON-MEV"];
-                    const randomIndex = Math.floor(
-                      Math.random() * keywords.length
-                    );
-                    return keywords[randomIndex];
-                  }
+                  const input_data = {
+                    block: blocknumber,
+                    tx_hash: requestId,
+                  };
+                  const response = await axios.get(url, {
+                    params: {
+                      input: JSON.stringify(input_data),
+                    },
+                  });
 
-                  const apiResult = getRandomKeyword();
+                  const apiResult = response.data.result;
                   console.log("API result:", apiResult);
 
                   console.log("Sending result to contract...");
