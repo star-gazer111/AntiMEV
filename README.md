@@ -2,7 +2,7 @@
 
 ### The AI way of tracking MEV Transactions! We are using Graph Neural Networks to ensure better MEV tracking for fair reward distribution among Validators & for comprehensive statistical analysis.
 
-We use Graph Neural Networks to track transactions happening on-chain.
+We use Graph Neural Networks to track transactions happening on-chain. Here's a l[ive demo](https://mev-spy.vercel.app/) for you !
 
 # Overview
 
@@ -35,20 +35,65 @@ This is how MEVSpy makes MEV tracking & analysis faster & efficient than ever
 
 # How to Use
 
+### Case-1 : You wish to scan your transaction
+
+Well, for this you can directly use this [link](https://mev-spy.vercel.app/).
+
+### Case-2 : You wish to train the Model.
+
 1. Clone the repository
    ``` bash
    git clone git@github.com:star-gazer111/MEVSpy.git && cd MEVSpy
    ```
 
-3. Open a terminal & start the model API
+2. Open a terminal & start the model API
    ``` bash
    cd GNN && python main.py
    ```
 
-5. Start another terminal & test your requests onton API using CLI.
+3. Start another terminal & test your requests onto the API using CLI.
    ``` bash
    python predict.py
    ```
+4. Open another terminal & start LitNode
+   ``` bash
+   cd backend && node run_scripts.js
+   ```
+5. Start the training!
+   ``` bash
+   cd TrainArbinet && ./run.sh
+   ```
+   In case, you get ```permission denied``` , make the script executable using :
+   ``` bash
+   chmod +x run.sh
+   ```
+
+### Case-3 : You wish to generate the dataset (be cautious of the hardware needs & be patient for the time it takes )
+
+1. Clone the repository
+   ``` bash
+   git clone git@github.com:star-gazer111/MEVSpy.git && cd MEVSpy
+   ```
+
+2. Start the snapshotter node
+   ``` bash
+   cd Powerloom && cd snapshotter && cd utils && cd preloaders && python preloader.py
+   ```
+
+3. Start another terminal & activate the ```py-ipfs-client``` library. This will be required for archiving the snaps on Filecoin
+
+   3a. Install Poetry
+   ``` bash
+   curl -sSL https://install.python-poetry.org | python3 -
+   ```
+
+   3b. Verify Installation
+   ``` bash
+   source ~/.bashrc  # or ~/.zshrc, ~/.profile, etc. && poetry --version
+
+   ```
+
+   3c. 
 
 # Citation
 ```bash
