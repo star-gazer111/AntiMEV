@@ -12,7 +12,7 @@ We use Graph Neural Networks to track transactions happening on-chain. Here's a 
 
 The project is a comprehensive one & involves 3 separately working parts linked to each other privately & securely using Lit Actions.
 
-The first part of the project is the dataset generation. We utilise [Powerloom Snapshotters](https://docs.powerloom.io/docs/build-with-powerloom/snapshotter-node/introduction) for this. The snapshotters take snap of the epoch from block ```15615328``` to block ```15643187```. The snapshotters generate transaction receipts of each transaction that was part of these blocks, the transactions are then sampled into a CSV and labelled as MEV & Non-MEV according to the algo mentioned below :
+The first part of the project is the dataset generation. We utilise [Powerloom Snapshotters](https://docs.powerloom.io/docs/build-with-powerloom/snapshotter-node/introduction) for this. The snapshotters take snap of the epoch from block ```15615328``` to block ```15643187```. The snapshotters generate transaction receipts of each transaction that was part of these blocks, the transactions are then sampled into a CSV to create this [dataset](https://github.com/star-gazer111/MEVSpy/blob/c32f4d225961bb34b0a485386b2f819859be1d30/dataset/transactions.csv) and labelled as MEV & Non-MEV  according to the algo mentioned below :
 ![image](https://github.com/star-gazer111/MEVSpy/blob/main/architecture/Screenshot%20from%202024-05-21%2013-10-38.png)
 
 The dataset is then archived onto filecoin using the py-ipfs-client library provided by Powerloom. We made several improvements to the library such as a documentation to use it, added 7 more tests, optimised the code, added error handling & retrying mechanisms & also optimised exceptions handling & logging. Then Lassie can be used by Clients to retrieve the data from Filecoin for training the GNN model. The architecture is as shown below :
@@ -55,10 +55,12 @@ Well, for this you can directly use this [link](https://mev-spy.vercel.app/).
    ``` bash
    python predict.py
    ```
+   
 4. Open another terminal & start LitNode
    ``` bash
    cd backend && node run_scripts.js
    ```
+   
 5. Start the training!
    ``` bash
    cd TrainArbinet && ./run.sh
@@ -67,6 +69,18 @@ Well, for this you can directly use this [link](https://mev-spy.vercel.app/).
    ``` bash
    chmod +x run.sh
    ```
+
+6. Start the frontend
+   ``` bash
+   cd App && cd client && cd src && npm i
+   ```
+
+7. Run!
+   ``` bash
+   npm run dev
+   ```
+
+Be sure to replace the url [here](https://github.com/star-gazer111/MEVSpy/blob/c32f4d225961bb34b0a485386b2f819859be1d30/App/client/src/components/ResultModal.jsx#L57) with your own endpoint after running the api above.
 
 ### Case-3 : You wish to generate the dataset (be cautious of the hardware needs & be patient for the time it takes )
 
