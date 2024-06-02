@@ -142,6 +142,7 @@ const Business = () => {
               display: "flex",
               alignItems: "center",
               marginBottom: "50px",
+              marginTop: "25px",
             }}
           >
             <p
@@ -213,7 +214,7 @@ const Business = () => {
               color: "#fff",
               outline: "none",
               width: "100%",
-              marginBottom: "30px",
+              marginBottom: "1px",
               textAlign: "center",
               fontSize: "18px",
               boxShadow: "0 0 20px rgba(255, 255, 255, 0.5)",
@@ -225,14 +226,14 @@ const Business = () => {
           />
           <div className="flex justify-center mt-12">
             <button
-              className="py-3 px-6 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px] mt-4"
+              className="py-3 px-6 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px] mt-1"
               style={{ marginRight: "10px" }}
               onClick={handleSend}
             >
               Send
             </button>
             <button
-              className="py-3 px-6 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px] mt-4"
+              className="py-3 px-6 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px] mt-1"
               style={{ marginLeft: "10px" }}
               onClick={handleReset}
             >

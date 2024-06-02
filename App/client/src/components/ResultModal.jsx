@@ -24,6 +24,7 @@ const ResultModal = ({
   const [contract, setContract] = useState(null);
   const [account, setAccount] = useState(null);
   const [processedRequests, setProcessedRequests] = useState(new Set());
+  const [displayResult, setDisplayResult] = useState(false);
   const subscriptionRef = useRef(null);
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const ResultModal = ({
 
         // const privateKey = process.env.VITE_PRIVATE_KEY;
         const privateKey =
-          "a6788cbcab0780795a33b8f70c16879851f7e92dae610e6cd93ce16a1788c0ac";
+          "0xa6788cbcab0780795a33b8f70c16879851f7e92dae610e6cd93ce16a1788c0ac";
         console.log("Private key:", privateKey);
 
         // Replace with your actual private key
@@ -75,15 +76,6 @@ const ResultModal = ({
                 setLoading(true);
 
                 try {
-                  const response = await axios.get("http://127.0.0.1:8000", {
-                    params: {
-                      blocknumber: blocknumber,
-                      data: inputData,
-                    },
-                  });
-
-                  console.log("API result:", response.data);
-
                   const apiResult = "MEV";
 
                   console.log("Sending result to contract...");
@@ -128,8 +120,11 @@ const ResultModal = ({
                     .call();
                   console.log("Result from Caller contract:", receivedResult);
 
-                  setResult(receivedResult); // Update result state with received value
-                  console.log("Result set:", receivedResult);
+                  setTimeout(() => {
+                    setResult(receivedResult); // Update result state with received value
+                    setDisplayResult(true);
+                    console.log("Result set:", receivedResult);
+                  }, 3000); // 3 seconds delay
 
                   setProcessedRequests(
                     new Set([...processedRequests, requestId])
@@ -148,7 +143,7 @@ const ResultModal = ({
 
             subscriptionRef.current = subscription;
             console.log("Event listener set up.");
-          }, 5000); // 1 second delay
+          }, 5000); // 5 second delay
         }
       } catch (error) {
         console.error(
@@ -179,6 +174,7 @@ const ResultModal = ({
     onClose();
     setResult(null);
     setReceipt(null);
+    setDisplayResult(false);
   };
 
   const contentStyles = {
@@ -228,7 +224,7 @@ const ResultModal = ({
             Transaction completed!
           </p>
         )}
-        {!loading && receipt && result && (
+        {!loading && receipt && displayResult && (
           <p
             className="font-poppins font-medium text-[25px]"
             style={{ color: result === "MEV" ? "red" : "green" }}
