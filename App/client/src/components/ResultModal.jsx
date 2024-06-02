@@ -5,8 +5,6 @@ import Web3 from "web3";
 import Oracle from "../contracts/Oracle.json";
 import Caller from "../contracts/Caller.json";
 import axios from "axios";
-// import dotenv from "dotenv";
-// dotenv.config();
 
 Modal.setAppElement("#root");
 
@@ -42,12 +40,8 @@ const ResultModal = ({
         setContract(contractInstance);
         console.log("Oracle Contract instance set.");
 
-        // const privateKey = process.env.VITE_PRIVATE_KEY;
-        const privateKey =
-          "0xa6788cbcab0780795a33b8f70c16879851f7e92dae610e6cd93ce16a1788c0ac";
-        console.log("Private key:", privateKey);
+        const privateKey = process.env.PRIVATE_KEY;
 
-        // Replace with your actual private key
         const account = web3.eth.accounts.privateKeyToAccount(privateKey);
         setAccount(account);
         console.log("Account set:", account);
@@ -55,7 +49,6 @@ const ResultModal = ({
         if (!subscriptionRef.current) {
           console.log("Setting up event listener...");
 
-          // Introduce a short delay before setting up the event listener
           setTimeout(() => {
             const subscription = contractInstance.events
               .DataInput()
@@ -120,7 +113,6 @@ const ResultModal = ({
                   setReceipt(receipt2);
                   console.log("Result sent to contract, receipt:", receipt2);
 
-                  // Call the getResult function from Caller contract
                   const callerContract = new web3.eth.Contract(
                     Caller,
                     contractAddress
@@ -132,17 +124,17 @@ const ResultModal = ({
                   console.log("Result from Caller contract:", receivedResult);
 
                   setTimeout(() => {
-                    setResult(receivedResult); // Update result state with received value
+                    setResult(receivedResult);
                     setDisplayResult(true);
                     console.log("Result set:", receivedResult);
-                  }, 3000); // 3 seconds delay
+                  }, 3000);
 
                   setProcessedRequests(
                     new Set([...processedRequests, requestId])
                   );
                 } catch (error) {
                   console.error("Error in API call or contract method:", error);
-                  // Ensure to unset loading state on error
+
                   setLoading(false);
                 } finally {
                   setLoading(false);
@@ -154,7 +146,7 @@ const ResultModal = ({
 
             subscriptionRef.current = subscription;
             console.log("Event listener set up.");
-          }, 5000); // 5 second delay
+          }, 5000);
         }
       } catch (error) {
         console.error(
