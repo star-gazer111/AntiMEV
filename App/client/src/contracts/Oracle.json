@@ -38,7 +38,7 @@
         "type": "string"
       }
     ],
-    "name": "DataRequested",
+    "name": "DataInput",
     "type": "event"
   },
   {
@@ -71,9 +71,9 @@
       },
       {
         "indexed": false,
-        "internalType": "uint8",
+        "internalType": "string",
         "name": "result",
-        "type": "uint8"
+        "type": "string"
       }
     ],
     "name": "ResultProcessed",
@@ -179,11 +179,6 @@
         "internalType": "bytes32",
         "name": "inputData",
         "type": "bytes32"
-      },
-      {
-        "internalType": "string",
-        "name": "url",
-        "type": "string"
       }
     ],
     "name": "requestResult",
@@ -199,19 +194,26 @@
         "type": "uint256"
       },
       {
-        "internalType": "uint8",
+        "internalType": "string",
         "name": "result",
-        "type": "uint8"
+        "type": "string"
       }
     ],
     "name": "sendResult",
-    "outputs": [
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
       {
-        "internalType": "uint8",
-        "name": "",
-        "type": "uint8"
+        "internalType": "string",
+        "name": "url",
+        "type": "string"
       }
     ],
+    "name": "setURL",
+    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },

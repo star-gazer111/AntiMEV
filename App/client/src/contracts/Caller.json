@@ -21,9 +21,15 @@
       },
       {
         "indexed": false,
-        "internalType": "string",
+        "internalType": "uint256",
+        "name": "blocknumber",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
         "name": "inputData",
-        "type": "string"
+        "type": "bytes32"
       }
     ],
     "name": "DataRequested",
@@ -40,9 +46,9 @@
       },
       {
         "indexed": false,
-        "internalType": "uint8",
+        "internalType": "string",
         "name": "result",
-        "type": "uint8"
+        "type": "string"
       }
     ],
     "name": "ResultProcessed",
@@ -59,9 +65,9 @@
     "name": "getResult",
     "outputs": [
       {
-        "internalType": "uint8",
+        "internalType": "string",
         "name": "result",
-        "type": "uint8"
+        "type": "string"
       }
     ],
     "stateMutability": "view",
@@ -88,19 +94,13 @@
         "type": "uint256"
       },
       {
-        "internalType": "uint8",
+        "internalType": "string",
         "name": "result",
-        "type": "uint8"
+        "type": "string"
       }
     ],
     "name": "processResult",
-    "outputs": [
-      {
-        "internalType": "uint8",
-        "name": "",
-        "type": "uint8"
-      }
-    ],
+    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -131,13 +131,7 @@
       }
     ],
     "name": "requestResult",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -150,32 +144,6 @@
       }
     ],
     "name": "results",
-    "outputs": [
-      {
-        "internalType": "uint8",
-        "name": "",
-        "type": "uint8"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "_url",
-        "type": "string"
-      }
-    ],
-    "name": "setUrl",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "url",
     "outputs": [
       {
         "internalType": "string",

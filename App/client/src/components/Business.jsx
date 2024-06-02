@@ -16,11 +16,11 @@ const Business = () => {
   const networks = {
     Galadriel: {
       rpcUrl: "https://devnet.galadriel.com",
-      contractAddress: "0x6383D7B0021A7fF2094d3C7E7fA791b86E941E1D",
+      contractAddress: "0x4bFEF046E5e70Fb1180A63AAb761189BF2D2E89f",
     },
     FVM: {
       rpcUrl: "https://rpc.ankr.com/filecoin_testnet",
-      contractAddress: "0xEA32f97F52e689c9106Ffb6Fac78AB307572F99D",
+      contractAddress: "0xA7c50F95041beD499C4a1aBAf0f74309a7ffa287",
     },
   };
 
@@ -117,7 +117,6 @@ const Business = () => {
         >
           Paste your transaction hash here
         </p>
-
         <div
           style={{
             backgroundColor: "rgba(30, 33, 57, 0.5)",
@@ -224,7 +223,6 @@ const Business = () => {
               borderRadius: "10px",
             }}
           />
-
           <div className="flex justify-center mt-12">
             <button
               className="py-3 px-6 bg-blue-gradient font-poppins font-medium text-[16px] text-primary outline-none rounded-[10px] mt-4"
