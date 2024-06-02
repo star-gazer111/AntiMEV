@@ -43,7 +43,7 @@ var constants_1 = require("@lit-protocol/constants");
 var ethers_1 = require("ethers");
 var contracts_sdk_1 = require("@lit-protocol/contracts-sdk");
 var constants_2 = require("@lit-protocol/constants");
-require("dotenv").config();
+//require("dotenv").config();
 function main() {
     return __awaiter(this, void 0, void 0, function () {
         var litNodeClient, wallet, latestBlockhash, litContracts, pkp;

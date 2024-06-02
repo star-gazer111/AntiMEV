@@ -43,7 +43,7 @@ var types_1 = require("@lit-protocol/types");
 var ethers_1 = require("ethers");
 var contracts_sdk_1 = require("@lit-protocol/contracts-sdk");
 var constants_2 = require("@lit-protocol/constants");
-require("dotenv").config();
+//require("dotenv").config();
 (function () { return __awaiter(void 0, void 0, void 0, function () {
     var litNodeClient, wallet, latestBlockhash, litContracts, sessionSigs, pkp, executeJsRes;
     return __generator(this, function (_a) {
