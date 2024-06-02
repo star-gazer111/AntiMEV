@@ -1,16 +1,15 @@
-# main.py
-
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import torch
 import torch.nn as nn
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
+import uvicorn
 
-# Step 1: Load the trained model and label encoder
-class SimpleClassifier(nn.Module):
+# Step 1: Loading the trained GNN and label encoder
+class GNNClassifier(nn.Module):
     def __init__(self, input_dim, hidden_dim, output_dim):
-        super(SimpleClassifier, self).__init__()
+        super(GNNClassifier, self).__init__()
         self.fc1 = nn.Linear(input_dim, hidden_dim)
         self.fc2 = nn.Linear(hidden_dim, output_dim)
 
@@ -19,7 +18,7 @@ class SimpleClassifier(nn.Module):
         x = self.fc2(x)
         return torch.log_softmax(x, dim=1)
 
-model = SimpleClassifier(input_dim=2, hidden_dim=32, output_dim=2)
+model = GNNClassifier(input_dim=2, hidden_dim=32, output_dim=2)
 model.load_state_dict(torch.load('model.pth', map_location=torch.device('cpu')))  # Load your trained model here
 
 label_encoder = LabelEncoder()
@@ -60,5 +59,4 @@ def root():
 
 # Step 5: Run FastAPI app with Uvicorn server
 if __name__ == '__main__':
-    import uvicorn
     uvicorn.run(app, host='127.0.0.1', port=8000)
