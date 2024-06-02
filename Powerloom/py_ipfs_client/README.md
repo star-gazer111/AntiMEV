@@ -34,3 +34,8 @@ Start a new terminal session & activate the ```py-ipfs-client``` library. This w
     ``` bash
     poetry install
     ```
+
+6. Run file
+   ``` bash
+   poetry run python path/to/your_script.py
+   ```
