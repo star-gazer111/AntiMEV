@@ -2,7 +2,7 @@
 
 ### The AI way of tracking MEV Transactions! We are using Graph Neural Networks to ensure better MEV tracking for fair reward distribution among Validators & for comprehensive statistical analysis.
 
-We use Graph Neural Networks to track transactions happening on-chain. Here's a l[ive demo](https://mev-spy.vercel.app/) for you !
+We use Graph Neural Networks to track transactions happening on-chain. Here's a [live demo](https://mev-spy.vercel.app/) for you !
 
 # Overview
 
