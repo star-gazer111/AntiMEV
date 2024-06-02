@@ -31,13 +31,21 @@ The final part is the user side. The trained model is hosted as an API (See more
 
 ![image](https://github.com/star-gazer111/MEVSpy/blob/d592e567af4d29bb7034a8b479892ba73de37ad6/architecture/MEVSpy.drawio%20(2).png)
 
-## This is how MEVSpy makes MEV tracking & analysis faster & efficient than ever!
+### This is how MEVSpy makes MEV tracking & analysis faster & efficient than ever!
+
+## Deployed Contracts
+
+| Contracts | Galadriel Devnet |
+|-----------|------------------|
+| [Oracle](https://github.com/star-gazer111/MEVSpy/blob/061e898011b0197a55dfeae8cf9f983572b0c4d9/Contracts/contracts/Caller.sol) | [0x1bFD12d25E35AB48AF1Ae46F5b3678c6c42F89E7](https://explorer.galadriel.com/address/0x1bFD12d25E35AB48AF1Ae46F5b3678c6c42F89E7) | 
+| [Caller](https://github.com/star-gazer111/MEVSpy/blob/061e898011b0197a55dfeae8cf9f983572b0c4d9/Contracts/contracts/Oracle.sol) | [0x4bFEF046E5e70Fb1180A63AAb761189BF2D2E89f](https://explorer.galadriel.com/address/0x4bFEF046E5e70Fb1180A63AAb761189BF2D2E89f) | 
+
 
 Check out below on how to use it.
 
 # How to Use
 
-### Case-1 : You wish to scan your transaction
+### Case-1 : You just wish to scan your transaction ( For 98% of the users).
 
 Well, for this you can directly use this [link](https://mev-spy.vercel.app/).
 
