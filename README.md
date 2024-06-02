@@ -19,6 +19,10 @@ The dataset is then archived onto filecoin using the py-ipfs-client library prov
 
 ![image](https://github.com/star-gazer111/MEVSpy/blob/34b0ae2f654952828fa04f20e6abfcdfc510a3b5/architecture/MEVSpy.drawio%20(3).png)
 
+The architecture for the GNN we are using is as shown :
+
+![image](https://github.com/star-gazer111/MEVSpy/blob/a5212e39cd43d18bb82e45edf067f48355cbb703/architecture/Screenshot%20from%202024-05-21%2013-10-44.png)
+
 The second part of MEVSPy involves training the GNN using the dataset generated from Part 1. The clients using LIt Actions train securely on their own end the model & sends the results to the server who aggregates them & keeps updating the global parameters. The approach of Federated Learning is utilised here for decentralised training of GNN using Lit Actions & Filecoin.
 
 ![image](https://github.com/star-gazer111/MEVSpy/blob/9b8b87e612f1c032b72772595016ab283fb50ec6/architecture/MEVSpy.drawio%20(1).png)
@@ -29,7 +33,18 @@ The final part is the user side. The trained model is hosted as an API (See more
 
 This is how MEVSpy makes MEV tracking & analysis faster & efficient than ever
 
-Inspiration taken from 
+# How to Use
+
+1. Clone the repository
+   ```git clone git@github.com:star-gazer111/MEVSpy.git && cd MEVSpy```
+
+2. Open a terminal & start the model API
+   ```cd GNN && python main.py```
+
+3. Start another terminal & test your requests onton API using CLI.
+   ```python predict.py```
+
+# Citation
 ```bash
 @article{park2023unraveling,
   title={Unraveling the MEV Enigma: ABI-Free Detection Model using Graph Neural Networks},
