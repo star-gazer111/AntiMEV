@@ -37,8 +37,8 @@ The final part is the user side. The trained model is hosted as an API (See more
 
 | Contracts | Galadriel Devnet |
 |-----------|------------------|
-| [Oracle](https://github.com/star-gazer111/MEVSpy/blob/061e898011b0197a55dfeae8cf9f983572b0c4d9/Contracts/contracts/Caller.sol) | [0x1bFD12d25E35AB48AF1Ae46F5b3678c6c42F89E7](https://explorer.galadriel.com/address/0x1bFD12d25E35AB48AF1Ae46F5b3678c6c42F89E7) | 
-| [Caller](https://github.com/star-gazer111/MEVSpy/blob/061e898011b0197a55dfeae8cf9f983572b0c4d9/Contracts/contracts/Oracle.sol) | [0x4bFEF046E5e70Fb1180A63AAb761189BF2D2E89f](https://explorer.galadriel.com/address/0x4bFEF046E5e70Fb1180A63AAb761189BF2D2E89f) | 
+| [Oracle](https://github.com/star-gazer111/MEVSpy/blob/main/Contracts/contracts/Oracle.sol) | [0x1bFD12d25E35AB48AF1Ae46F5b3678c6c42F89E7](https://explorer.galadriel.com/address/0x1bFD12d25E35AB48AF1Ae46F5b3678c6c42F89E7) | 
+| [Caller](https://github.com/star-gazer111/MEVSpy/blob/061e898011b0197a55dfeae8cf9f983572b0c4d9/Contracts/contracts/Caller.sol) | [0x4bFEF046E5e70Fb1180A63AAb761189BF2D2E89f](https://explorer.galadriel.com/address/0x4bFEF046E5e70Fb1180A63AAb761189BF2D2E89f) | 
 
 
 Check out below on how to use it.
