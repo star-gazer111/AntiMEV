@@ -15,17 +15,18 @@ Start a new terminal session & activate the ```py-ipfs-client``` library. This w
 
    ```
 
-3.  Add Poetry to path manually . If the automatic addition to PATH didn't work, you can manually add Poetry to your PATH. Typically, Poetry is installed in the 
+3.  Add Poetry to path manually . If the automatic addition to PATH didn't work, you can manually add Poetry to your PATH. 
+    Typically, Poetry is installed in the 
        following directory:
 
-   On Unix (Linux/macOS): ```$HOME/.local/bin```
-   On Windows: ```%APPDATA%\Python\Scripts```
+    On Unix (Linux/macOS): ```$HOME/.local/bin```
+    On Windows: ```%APPDATA%\Python\Scripts```
 
-   ``` bash
-   export PATH="$HOME/.local/bin:$PATH"
-   ```
+    ``` bash
+    export PATH="$HOME/.local/bin:$PATH"
+    ```
 
-4. Install packages
-   ``` bash
-   poetry install
-   ```
+4.  Install packages
+    ``` bash
+    poetry install
+    ```
