@@ -36,13 +36,19 @@ This is how MEVSpy makes MEV tracking & analysis faster & efficient than ever
 # How to Use
 
 1. Clone the repository
-   ```git clone git@github.com:star-gazer111/MEVSpy.git && cd MEVSpy```
+   ``` bash
+   git clone git@github.com:star-gazer111/MEVSpy.git && cd MEVSpy
+   ```
 
-2. Open a terminal & start the model API
-   ```cd GNN && python main.py```
+3. Open a terminal & start the model API
+   ``` bash
+   cd GNN && python main.py
+   ```
 
-3. Start another terminal & test your requests onton API using CLI.
-   ```python predict.py```
+5. Start another terminal & test your requests onton API using CLI.
+   ``` bash
+   python predict.py
+   ```
 
 # Citation
 ```bash
