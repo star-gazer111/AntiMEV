@@ -21,7 +21,11 @@ The dataset is then archived onto filecoin using the py-ipfs-client library prov
 
 The second part of MEVSPy involves training the GNN using the dataset generated from Part 1. The clients using LIt Actions train securely on their own end the model & sends the results to the server who aggregates them & keeps updating the global parameters. The approach of Federated Learning is utilised here for decentralised training of GNN using Lit Actions & Filecoin.
 
+![image](https://github.com/star-gazer111/MEVSpy/blob/9b8b87e612f1c032b72772595016ab283fb50ec6/architecture/MEVSpy.drawio%20(1).png)
+
 The final part is the user side. The trained model is hosted as an API (See more on it in the #how-to-run section of README). The user calls the main contract that interacts with the Oracle Contract through Lit Actions again(securely) & the oracle then calls the off-chain GNN with an input which is the tx_hash & the blockNumber that user gave as input and wants to scan it. The output is sent back by oracle using the callback function used in the contract. The contracts are deployed on FVM testnet & Galadriel Devnet. The architecture for the 3rd part is inspired from Galadriel.
+
+![image](https://github.com/star-gazer111/MEVSpy/blob/9b8b87e612f1c032b72772595016ab283fb50ec6/architecture/MEVSpy.drawio%20(1).png)
 
 This is how MEVSpy makes MEV tracking & analysis faster & efficient than ever
 
