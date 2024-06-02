@@ -136,7 +136,10 @@ Be sure to replace the url [here](https://github.com/star-gazer111/MEVSpy/blob/c
    ``` bash
    poetry install
    ```
-   
+   3e. Run File
+   ``` bash
+   poetry run python path/to/your_script.py
+   ```
    
 
 # Citation
