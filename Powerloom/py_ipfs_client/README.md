@@ -4,18 +4,22 @@
 
 Start a new terminal session & activate the ```py-ipfs-client``` library. This will be required for archiving the snaps on Filecoin
 
-1. Install Poetry
+1. Clone the repository
+   ``` bash
+   git clone git@github.com:PowerLoom/py-ipfs-client.git && cd py-ipfs-client
+   ```
+
+2. Install Poetry
    ``` bash
    curl -sSL https://install.python-poetry.org | python3 -
    ```
 
-2.  Verify Installation
-   ``` bash
-   source ~/.bashrc  # or ~/.zshrc, ~/.profile, etc. && poetry --version
+3.  Verify Installation
+    ``` bash
+    source ~/.bashrc  # or ~/.zshrc, ~/.profile, etc. && poetry --version
+    ```
 
-   ```
-
-3.  Add Poetry to path manually . If the automatic addition to PATH didn't work, you can manually add Poetry to your PATH. 
+4.  Add Poetry to path manually . If the automatic addition to PATH didn't work, you can manually add Poetry to your PATH. 
     Typically, Poetry is installed in the 
        following directory:
 
@@ -26,7 +30,7 @@ Start a new terminal session & activate the ```py-ipfs-client``` library. This w
     export PATH="$HOME/.local/bin:$PATH"
     ```
 
-4.  Install packages
+5.  Install packages
     ``` bash
     poetry install
     ```
