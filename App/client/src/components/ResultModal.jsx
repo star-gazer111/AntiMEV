@@ -76,7 +76,16 @@ const ResultModal = ({
                 setLoading(true);
 
                 try {
-                  const apiResult = "MEV";
+                  function getRandomKeyword() {
+                    const keywords = ["MEV", "NON-MEV"];
+                    const randomIndex = Math.floor(
+                      Math.random() * keywords.length
+                    );
+                    return keywords[randomIndex];
+                  }
+
+                  const apiResult = getRandomKeyword();
+                  console.log("API result:", apiResult);
 
                   console.log("Sending result to contract...");
 
