@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "MEVSpy"
 version = "0.1.0"
-description = "A description of your project"
+description = "Tracking MEV through Graph Neural Networks"
 authors = ["star-gazer111 <vasu_k@ee.iitr.ac.in>"]
 
 [tool.poetry.dependencies]
