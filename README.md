@@ -1,4 +1,4 @@
-# MEV spy
+# MEVSpy
 
 ### The AI way of tracking MEV Transactions! We are using Graph Neural Networks to ensure better MEV tracking for fair reward distribution among Validators & for comprehensive statistical analysis.
 
