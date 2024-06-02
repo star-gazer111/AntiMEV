@@ -93,7 +93,22 @@ Well, for this you can directly use this [link](https://mev-spy.vercel.app/).
 
    ```
 
-   3c. 
+   3c. Add Poetry to path manually . If the automatic addition to PATH didn't work, you can manually add Poetry to your PATH. Typically, Poetry is installed in the 
+       following directory:
+
+   On Unix (Linux/macOS): ```$HOME/.local/bin```
+   On Windows: ```%APPDATA%\Python\Scripts```
+
+   ``` bash
+   export PATH="$HOME/.local/bin:$PATH"
+   ```
+
+   3d. Install packages
+   ``` bash
+   poetry install
+   ```
+   
+   
 
 # Citation
 ```bash
