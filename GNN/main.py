@@ -40,13 +40,9 @@ class TransactionOutput(BaseModel):
 @app.post('/predict/', response_model=TransactionOutput)
 def predict(transaction: TransactionInput):
     try:
-        # Encode transaction hash
         tx_hash_encoded = label_encoder.transform([transaction.tx_hash])[0]
-        
-        # Prepare input tensor
         input_tensor = torch.tensor([[transaction.block, tx_hash_encoded]], dtype=torch.float32)
 
-        # Make prediction
         model.eval()
         with torch.no_grad():
             output = model(input_tensor)
