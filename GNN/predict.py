@@ -1,6 +1,6 @@
 import requests
 
-api_url = 'http://127.0.0.1:8000/predict/'
+api_url = 'Add your endpoint'
 
 input_data = {
        'block': 15588120,
