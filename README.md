@@ -16,7 +16,6 @@ The first part of the project is the dataset generation. The transactions are fe
 ![image](https://github.com/star-gazer111/MEVSpy/blob/main/architecture/Screenshot%20from%202024-05-21%2013-10-38.png)
 
 
-
 The architecture for the GNN we are using is as shown :
 
 ![image](https://github.com/star-gazer111/MEVSpy/blob/a5212e39cd43d18bb82e45edf067f48355cbb703/architecture/Screenshot%20from%202024-05-21%2013-10-44.png)
@@ -24,7 +23,7 @@ The architecture for the GNN we are using is as shown :
 The second part of AntiMEV involves training the GNN using the dataset generated from Part 1. 
 
 
-The final part is the user side. The trained model is hosted as an API . The user calls the main contract that interacts with the Oracle Contract through Lit Actions again(securely) & the oracle then calls the off-chain GNN with an input which is the tx_hash & the blockNumber that user gave as input and wants to scan it. The output is sent back by oracle using the callback function used in the contract. T The architecture for the 3rd part is inspired from Galadriel.
+The final part is the user side. The trained model is hosted as an API . The user calls the main contract that interacts with the Oracle Contract through Lit Actions again(securely) & the oracle then calls the off-chain GNN with an input which is the tx_hash & the blockNumber that user gave as input and wants to scan it. The output is sent back by oracle using the callback function used in the contract. T The architecture for the 3rd part is inspired from [Galadriel](https://galadriel.com/).
 
 
 ### This is how AntiMEV makes MEV tracking & analysis faster & efficient than ever!
