@@ -15,9 +15,7 @@ The project is a comprehensive one & involves 3 separately working parts linked 
 The first part of the project is the dataset generation. The transactions are fetched and labelled as MEV & Non-MEV  according to the algo mentioned below :
 ![image](https://github.com/star-gazer111/MEVSpy/blob/main/architecture/Screenshot%20from%202024-05-21%2013-10-38.png)
 
-The dataset is then archived onto filecoin using the py-ipfs-client library provided by Powerloom. We made several improvements to the library such as a documentation to use it, added 7 more tests, optimised the code, added error handling & retrying mechanisms & also optimised exceptions handling & logging. Then Lassie can be used by Clients to retrieve the data from Filecoin for training the GNN model. The architecture is as shown below :
 
-![image](https://github.com/star-gazer111/MEVSpy/blob/34b0ae2f654952828fa04f20e6abfcdfc510a3b5/architecture/MEVSpy.drawio%20(3).png)
 
 The architecture for the GNN we are using is as shown :
 
