@@ -21,28 +21,16 @@ The architecture for the GNN we are using is as shown :
 
 ![image](https://github.com/star-gazer111/MEVSpy/blob/a5212e39cd43d18bb82e45edf067f48355cbb703/architecture/Screenshot%20from%202024-05-21%2013-10-44.png)
 
-The second part of MEVSPy involves training the GNN using the dataset generated from Part 1. The clients using LIt Actions train securely on their own end the model & sends the results to the server who aggregates them & keeps updating the global parameters. The approach of Federated Learning is utilised here for decentralised training of GNN using Lit Actions & Filecoin.
+The second part of AntiMEV involves training the GNN using the dataset generated from Part 1. The clients using LIt Actions train securely on their own end the model & sends the results to the server who aggregates them & keeps updating the global parameters. The approach of Federated Learning is utilised here for decentralised training of GNN using Lit Actions & Filecoin.
 
 ![image](https://github.com/star-gazer111/MEVSpy/blob/9b8b87e612f1c032b72772595016ab283fb50ec6/architecture/MEVSpy.drawio%20(1).png)
 
-The final part is the user side. The trained model is hosted as an API (See more on it in the #how-to-run section of README). The user calls the main contract that interacts with the Oracle Contract through Lit Actions again(securely) & the oracle then calls the off-chain GNN with an input which is the tx_hash & the blockNumber that user gave as input and wants to scan it. The output is sent back by oracle using the callback function used in the contract. The contracts are deployed on FVM testnet & Galadriel Devnet. The architecture for the 3rd part is inspired from Galadriel.
+The final part is the user side. The trained model is hosted as an API (See more on it in the #how-to-run section of README). The user calls the main contract that interacts with the Oracle Contract through Lit Actions again(securely) & the oracle then calls the off-chain GNN with an input which is the tx_hash & the blockNumber that user gave as input and wants to scan it. The output is sent back by oracle using the callback function used in the contract. T The architecture for the 3rd part is inspired from Galadriel.
 
 ![image](https://github.com/star-gazer111/MEVSpy/blob/d592e567af4d29bb7034a8b479892ba73de37ad6/architecture/MEVSpy.drawio%20(2).png)
 
-### This is how MEVSpy makes MEV tracking & analysis faster & efficient than ever!
+### This is how AntiMEV makes MEV tracking & analysis faster & efficient than ever!
 
-## Deployed Contracts
-
-| Contracts | Galadriel Devnet |
-|-----------|------------------|
-| [Oracle](https://github.com/star-gazer111/MEVSpy/blob/main/Contracts/contracts/Oracle.sol) | [0x1bFD12d25E35AB48AF1Ae46F5b3678c6c42F89E7](https://explorer.galadriel.com/address/0x1bFD12d25E35AB48AF1Ae46F5b3678c6c42F89E7) | 
-| [Caller](https://github.com/star-gazer111/MEVSpy/blob/061e898011b0197a55dfeae8cf9f983572b0c4d9/Contracts/contracts/Caller.sol) | [0x4bFEF046E5e70Fb1180A63AAb761189BF2D2E89f](https://explorer.galadriel.com/address/0x4bFEF046E5e70Fb1180A63AAb761189BF2D2E89f) | 
-
-
-| Contracts | Filecoin Testnet(FVM) |
-|-----------|------------------|
-| [Oracle](https://github.com/star-gazer111/MEVSpy/blob/main/Contracts/contracts/Oracle.sol) | [t410fn3meae2jwkg2bvjsk4awog3jkgzzp2h4qv2opzq](https://calibration.filfox.info/en/address/0x6Ed8401349B28DA0D5325701671b6951b397E8FC)| 
-| [Caller](https://github.com/star-gazer111/MEVSpy/blob/main/Contracts/contracts/Caller.sol) |[t410fu7cq7fiedpwuthckdk5pb52dbgt77iuhtrea5aa](https://calibration.filfox.info/en/address/0xA7c50F95041beD499C4a1aBAf0f74309a7ffa287)| 
 
 Check out below on how to use it.
 
@@ -95,49 +83,6 @@ Well, for this you can directly use this [link](https://mev-spy.vercel.app/).
 
 Be sure to replace the url [here](https://github.com/star-gazer111/MEVSpy/blob/c32f4d225961bb34b0a485386b2f819859be1d30/App/client/src/components/ResultModal.jsx#L57) with your own endpoint after running the api above.
 
-### Case-3 : You wish to generate the dataset (be cautious of the hardware needs & be patient for the time it takes )
-
-1. Clone the repository
-   ``` bash
-   git clone git@github.com:star-gazer111/MEVSpy.git && cd MEVSpy
-   ```
-
-2. Start the snapshotter node
-   ``` bash
-   cd Powerloom && cd snapshotter && cd utils && cd preloaders && python preloader.py
-   ```
-
-3. Start another terminal & activate the ```py-ipfs-client``` library. This will be required for archiving the snaps on Filecoin
-
-   3a. Install Poetry
-   ``` bash
-   curl -sSL https://install.python-poetry.org | python3 -
-   ```
-
-   3b. Verify Installation
-   ``` bash
-   source ~/.bashrc  # or ~/.zshrc, ~/.profile, etc. && poetry --version
-
-   ```
-
-   3c. Add Poetry to path manually . If the automatic addition to PATH didn't work, you can manually add Poetry to your PATH. Typically, Poetry is installed in the 
-       following directory:
-
-   On Unix (Linux/macOS): ```$HOME/.local/bin```
-   On Windows: ```%APPDATA%\Python\Scripts```
-
-   ``` bash
-   export PATH="$HOME/.local/bin:$PATH"
-   ```
-
-   3d. Install packages
-   ``` bash
-   poetry install
-   ```
-   3e. Run File
-   ``` bash
-   poetry run python path/to/your_script.py
-   ```
    
 
 # Citation
